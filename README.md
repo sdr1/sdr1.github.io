@@ -1,2 +1,4 @@
 # sdr1.github.io
-Steve's Personal Website
+
+Hi, I'm Steve.  I'm a data scientist.  Welcome to my website.
+
