@@ -6,7 +6,7 @@ aliases = ["about-us", "about-hugo", "contact"]
 author = "Hugo Authors"
 +++
 
-I am a data scientist who specializes in applying data science methods and social science research to study behavior. 
+I am a data scientist who specializes in applying data science methods and social science research to study behavior.  
 
 In the fall of 2023 I taught statistics and data science at the Department of Statistics and Data Science at the University of Texas, Austin.  Prior to that I was a senior scholar an the McCombs School of Business, where I studied corporate influence over the policymaking process.  My research sat at the intersection of political science, public management, and corporate political activity.  One of my more memorable projects focused on influence in financial regulation, shedding light on the extent and mechanisms through which organized interests use private information to alter public policy. For example, my research has shown that the ability to provide policy relevant information rather than organizational resources drives policy changes.  I also has ongoing projects on the Dodd-Frank Wall Street Reform Act. 
 
