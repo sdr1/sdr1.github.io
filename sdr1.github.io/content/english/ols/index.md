@@ -1,7 +1,7 @@
 ---
 title: "Regression"
 author: "Steven Rashin"
-date: "`r Sys.Date()`"
+date: "April 20, 2024"
 format: 
   hugo:
     code-fold: false
@@ -88,9 +88,9 @@ Data summary
 
 | skim_variable | n_missing | complete_rate |  mean |    sd |    p0 |   p25 |   p50 |   p75 |  p100 | hist  |
 |:----------|-------:|----------:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|:-----|
-| x1            |         0 |             1 | 15.09 |  4.92 | -2.31 | 11.72 | 15.26 | 18.34 | 34.35 | ▁▃▇▂▁ |
-| x2            |         0 |             1 | 30.14 |  9.98 | -0.83 | 23.72 | 30.02 | 37.24 | 62.67 | ▁▅▇▃▁ |
-| y             |         0 |             1 | 49.84 | 15.06 | -0.91 | 39.29 | 49.57 | 60.50 | 97.85 | ▁▃▇▅▁ |
+| x1            |         0 |             1 | 15.07 |  5.25 | -6.34 | 11.81 | 15.17 | 18.67 | 30.20 | ▁▂▇▇▁ |
+| x2            |         0 |             1 | 30.13 |  9.68 | -5.73 | 23.48 | 29.99 | 36.83 | 60.85 | ▁▃▇▅▁ |
+| y             |         0 |             1 | 50.13 | 15.00 |  7.89 | 39.40 | 50.07 | 60.33 | 99.73 | ▁▅▇▃▁ |
 
 ``` r
 # plot variables against DV to check for weirdness
@@ -145,20 +145,20 @@ modelsummary::modelsummary(std)
 
 |             |    (1)    |
 |:------------|:---------:|
-| (Intercept) |   2.756   |
-|             |  (1.395)  |
-| x1          |   1.034   |
-|             |  (0.063)  |
-| x2          |   1.045   |
-|             |  (0.031)  |
+| (Intercept) |   3.725   |
+|             |  (1.337)  |
+| x1          |   1.032   |
+|             |  (0.059)  |
+| x2          |   1.024   |
+|             |  (0.032)  |
 | Num.Obs.    |   1000    |
-| R2          |   0.577   |
-| R2 Adj.     |   0.576   |
-| AIC         |  7409.0   |
-| BIC         |  7428.6   |
-| Log.Lik.    | −3700.492 |
-| F           |  679.035  |
-| RMSE        |   9.79    |
+| R2          |   0.575   |
+| R2 Adj.     |   0.574   |
+| AIC         |  7404.8   |
+| BIC         |  7424.4   |
+| Log.Lik.    | −3698.395 |
+| F           |  675.059  |
+| RMSE        |   9.77    |
 
    
 
@@ -168,18 +168,18 @@ modelsummary::modelsummary(robust)
 
 |             |   (1)   |
 |:------------|:-------:|
-| (Intercept) |  2.756  |
-|             | (1.333) |
-| x1          |  1.034  |
-|             | (0.061) |
-| x2          |  1.045  |
-|             | (0.030) |
+| (Intercept) |  3.725  |
+|             | (1.287) |
+| x1          |  1.032  |
+|             | (0.056) |
+| x2          |  1.024  |
+|             | (0.031) |
 | Num.Obs.    |  1000   |
-| R2          |  0.577  |
-| R2 Adj.     |  0.576  |
-| AIC         | 7409.0  |
-| BIC         | 7428.6  |
-| RMSE        |  9.79   |
+| R2          |  0.575  |
+| R2 Adj.     |  0.574  |
+| AIC         | 7404.8  |
+| BIC         | 7424.4  |
+| RMSE        |  9.77   |
 
    
 
@@ -529,7 +529,7 @@ ggplot(DGP, aes(x=x, y=y)) +
 cov(x, y) / var(x)
 ```
 
-    [1] 3902.146
+    [1] 3922.46
 
 ``` r
 # Linear Algebra 
@@ -537,9 +537,9 @@ x_mat <- as.matrix(cbind(1, x)) # remember to add column of ones!
 solve( (t(x_mat) %*% x_mat) ) %*% (t(x_mat) %*% y) 
 ```
 
-           [,1]
-      51230.834
-    x  3902.146
+          [,1]
+      50850.71
+    x  3922.46
 
 ``` r
 # MLE
@@ -556,7 +556,7 @@ round(MLE$par,1)
 ```
 
     intercept         x     sigma 
-      51198.2    3903.0   39874.1 
+      50805.0    3926.7   40218.6 
 
 ``` r
 # Via Gradient Descent 
@@ -607,8 +607,8 @@ est$coefficients %>%
     # A tibble: 2 × 5
       Parameter Truth `OLS Estimate` `Gradient Descent`    MLE
       <chr>     <dbl>          <dbl>              <dbl>  <dbl>
-    1 a         50000         51231.             51231. 51198.
-    2 b          4000          3902.              3902.  3903.
+    1 a         50000         50851.             50851. 50805.
+    2 b          4000          3922.              3922.  3927.
 
 <img src="figs/unnamed-chunk-1-1.png" style="width:100.0%" data-fig-align="center" data-fig-pos="htbp" />
 
@@ -675,19 +675,19 @@ summary(m <- lm(y1 ~ x1 + x2))
 
     Residuals:
         Min      1Q  Median      3Q     Max 
-    -38.283  -7.132   0.136   6.658  32.335 
+    -33.976  -6.403  -0.408   6.714  32.190 
 
     Coefficients:
                 Estimate Std. Error t value Pr(>|t|)    
-    (Intercept)  2.13231    1.13466   1.879   0.0605 .  
-    x1           5.06105    0.06301  80.324   <2e-16 ***
-    x2           7.01263    0.03050 229.888   <2e-16 ***
+    (Intercept)  3.53696    1.16070   3.047  0.00237 ** 
+    x1           4.91569    0.05998  81.956  < 2e-16 ***
+    x2           7.04327    0.03078 228.800  < 2e-16 ***
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-    Residual standard error: 9.957 on 997 degrees of freedom
-    Multiple R-squared:  0.9838,    Adjusted R-squared:  0.9838 
-    F-statistic: 3.027e+04 on 2 and 997 DF,  p-value: < 2.2e-16
+    Residual standard error: 9.659 on 997 degrees of freedom
+    Multiple R-squared:  0.983, Adjusted R-squared:  0.9829 
+    F-statistic: 2.88e+04 on 2 and 997 DF,  p-value: < 2.2e-16
 
 ``` r
 X <- data.frame(1, x1, x2) 
@@ -723,9 +723,9 @@ tibble(
     # A tibble: 3 × 6
       our_beta[,1] their_beta our_error their_error our_robust_ses their_robust_ses
              <dbl>      <dbl>     <dbl>       <dbl>          <dbl>            <dbl>
-    1         2.13       2.13    1.13        1.13           1.12             1.12  
-    2         5.06       5.06    0.0630      0.0630         0.0662           0.0662
-    3         7.01       7.01    0.0305      0.0305         0.0292           0.0292
+    1         3.54       3.54    1.16        1.16           1.15             1.15  
+    2         4.92       4.92    0.0600      0.0600         0.0593           0.0593
+    3         7.04       7.04    0.0308      0.0308         0.0313           0.0313
 
 ## What if the homoskedasticity assumption is wrong?
 
@@ -1402,21 +1402,21 @@ dplyr::bind_rows(
 ```
 
     # A tibble: 13 × 6
-       Model         term           estimate std.error statistic     p.value
-       <chr>         <chr>             <dbl>     <dbl>     <dbl>       <dbl>
-     1 Pooled        (Intercept)   -4.01e- 1    6.67   -6.02e- 2 0.954      
-     2 De-meaned     (Intercept)    4.88e-17    0.0618  7.89e-16 1.00       
-     3 Fixed Effects (Intercept)    2.72e+ 0    0.250   1.09e+ 1 0.000405   
-     4 Fixed Effects as.factor(g)b -5.20e+ 0    0.219  -2.38e+ 1 0.0000185  
-     5 Fixed Effects as.factor(g)c -1.29e+ 1    0.193  -6.70e+ 1 0.000000297
-     6 Pooled        x              4.33e- 1    1.47    2.95e- 1 0.778      
-     7 Fixed Effects x              1.02e+ 0    0.0532  1.92e+ 1 0.0000435  
-     8 PLM           x              1.02e+ 0    0.0532  1.92e+ 1 0.0000435  
-     9 De-meaned     x.demeaned     1.02e+ 0    0.0435  2.35e+ 1 0.000000389
-    10 Pooled        x2            -7.04e- 1    2.55   -2.76e- 1 0.792      
-    11 Fixed Effects x2             2.82e- 1    0.108   2.62e+ 0 0.0588     
-    12 PLM           x2             2.82e- 1    0.108   2.62e+ 0 0.0588     
-    13 De-meaned     x2.demeaned    2.82e- 1    0.0880  3.21e+ 0 0.0184     
+       Model         term           estimate std.error statistic    p.value
+       <chr>         <chr>             <dbl>     <dbl>     <dbl>      <dbl>
+     1 Pooled        (Intercept)    1.48e+ 0    6.11    2.42e- 1 0.817     
+     2 De-meaned     (Intercept)    5.09e-18    0.101   5.03e-17 1         
+     3 Fixed Effects (Intercept)    2.74e+ 0    0.416   6.58e+ 0 0.00276   
+     4 Fixed Effects as.factor(g)b -4.92e+ 0    0.322  -1.53e+ 1 0.000106  
+     5 Fixed Effects as.factor(g)c -1.28e+ 1    0.348  -3.69e+ 1 0.00000321
+     6 Pooled        x             -9.89e- 2    1.39   -7.09e- 2 0.946     
+     7 Fixed Effects x              1.02e+ 0    0.0955  1.07e+ 1 0.000435  
+     8 PLM           x              1.02e+ 0    0.0955  1.07e+ 1 0.000435  
+     9 De-meaned     x.demeaned     1.02e+ 0    0.0780  1.31e+ 1 0.0000123 
+    10 Pooled        x2            -2.34e+ 0    1.90   -1.23e+ 0 0.264     
+    11 Fixed Effects x2             3.07e- 2    0.141   2.19e- 1 0.838     
+    12 PLM           x2             3.07e- 2    0.141   2.19e- 1 0.838     
+    13 De-meaned     x2.demeaned    3.07e- 2    0.115   2.68e- 1 0.798     
 
 ``` r
 # stargazer::stargazer( Pooled_OLS, Demean_OLS, fixed_reg,plm_ols,

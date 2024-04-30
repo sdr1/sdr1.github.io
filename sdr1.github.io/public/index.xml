@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>My blog</title>
-    <link>http://localhost:49639/</link>
+    <link>https://sdr1.github.io/</link>
     <description>Recent content on My blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 30 Apr 2024 11:35:44 -0500</lastBuildDate><atom:link href="http://localhost:49639/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 30 Apr 2024 11:35:44 -0500</lastBuildDate><atom:link href="https://sdr1.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Regression</title>
-      <link>http://localhost:49639/post/regression/</link>
+      <link>https://sdr1.github.io/post/regression/</link>
       <pubDate>Tue, 30 Apr 2024 11:35:44 -0500</pubDate>
       
-      <guid>http://localhost:49639/post/regression/</guid>
+      <guid>https://sdr1.github.io/post/regression/</guid>
       
         <description>We&amp;rsquo;ll start with one of my favorite topics: regression.</description>
       
@@ -20,10 +20,10 @@
     
     <item>
       <title>Welcome</title>
-      <link>http://localhost:49639/post/my-blog-post/</link>
+      <link>https://sdr1.github.io/post/my-blog-post/</link>
       <pubDate>Mon, 29 Apr 2024 11:35:44 -0500</pubDate>
       
-      <guid>http://localhost:49639/post/my-blog-post/</guid>
+      <guid>https://sdr1.github.io/post/my-blog-post/</guid>
       
         <description>Welcome Hi! Welcome to my blog. Here I&amp;rsquo;ll share my notes/tutorials that I&amp;rsquo;ve created for myself over the past few years.</description>
       
@@ -31,10 +31,10 @@
     
     <item>
       <title>Research</title>
-      <link>http://localhost:49639/research/</link>
+      <link>https://sdr1.github.io/research/</link>
       <pubDate>Wed, 10 Apr 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:49639/research/</guid>
+      <guid>https://sdr1.github.io/research/</guid>
       
         <description>Steven Rashin teaching</description>
       
@@ -42,10 +42,10 @@
     
     <item>
       <title>Software</title>
-      <link>http://localhost:49639/software/</link>
+      <link>https://sdr1.github.io/software/</link>
       <pubDate>Wed, 10 Apr 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:49639/software/</guid>
+      <guid>https://sdr1.github.io/software/</guid>
       
         <description>Steven Rashin software</description>
       
@@ -53,10 +53,10 @@
     
     <item>
       <title>Teaching</title>
-      <link>http://localhost:49639/teaching/</link>
+      <link>https://sdr1.github.io/teaching/</link>
       <pubDate>Wed, 10 Apr 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:49639/teaching/</guid>
+      <guid>https://sdr1.github.io/teaching/</guid>
       
         <description>Steven Rashin teaching</description>
       
@@ -64,10 +64,10 @@
     
     <item>
       <title>Steven Rashin</title>
-      <link>http://localhost:49639/bio/</link>
+      <link>https://sdr1.github.io/bio/</link>
       <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:49639/bio/</guid>
+      <guid>https://sdr1.github.io/bio/</guid>
       
         <description>Steve Rashin - he&#39;s a great guy&#39;</description>
       
@@ -75,10 +75,10 @@
     
     <item>
       <title>Contact</title>
-      <link>http://localhost:49639/contact/</link>
+      <link>https://sdr1.github.io/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:49639/contact/</guid>
+      <guid>https://sdr1.github.io/contact/</guid>
       
         <description>Contact Page</description>
       
@@ -86,10 +86,10 @@
     
     <item>
       <title>Regression</title>
-      <link>http://localhost:49639/ols/</link>
+      <link>https://sdr1.github.io/ols/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:49639/ols/</guid>
+      <guid>https://sdr1.github.io/ols/</guid>
       
         <description>Welcome to my OLS notes!
 TL; DR: Checklist Get summary stats for the variables.</description>
