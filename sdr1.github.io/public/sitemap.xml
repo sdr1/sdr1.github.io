@@ -2,44 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:54273/</loc>
+    <loc>http://localhost:65033/</loc>
     <lastmod>2024-04-30T11:35:44-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:54273/tags/index/</loc>
+    <loc>http://localhost:65033/tags/index/</loc>
     <lastmod>2024-04-30T11:35:44-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:54273/post/</loc>
+    <loc>http://localhost:65033/post/</loc>
     <lastmod>2024-04-30T11:35:44-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:54273/post/regression/</loc>
+    <loc>http://localhost:65033/post/regression/</loc>
     <lastmod>2024-04-30T11:35:44-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:54273/tags/</loc>
+    <loc>http://localhost:65033/tags/</loc>
     <lastmod>2024-04-30T11:35:44-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:54273/post/my-blog-post/</loc>
+    <loc>http://localhost:65033/post/my-blog-post/</loc>
     <lastmod>2024-04-29T11:35:44-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:54273/research/</loc>
+    <loc>http://localhost:65033/research/</loc>
     <lastmod>2024-04-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:54273/software/</loc>
+    <loc>http://localhost:65033/software/</loc>
     <lastmod>2024-04-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:54273/teaching/</loc>
+    <loc>http://localhost:65033/teaching/</loc>
     <lastmod>2024-04-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:54273/bio/</loc>
+    <loc>http://localhost:65033/bio/</loc>
     <lastmod>2019-02-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:54273/categories/</loc>
+    <loc>http://localhost:65033/categories/</loc>
   </url><url>
-    <loc>http://localhost:54273/contact/</loc>
+    <loc>http://localhost:65033/contact/</loc>
   </url><url>
-    <loc>http://localhost:54273/portfolio/</loc>
+    <loc>http://localhost:65033/portfolio/</loc>
   </url><url>
-    <loc>http://localhost:54273/ols/</loc>
+    <loc>http://localhost:65033/ols/</loc>
   </url><url>
-    <loc>http://localhost:54273/series/</loc>
+    <loc>http://localhost:65033/series/</loc>
   </url>
 </urlset>
