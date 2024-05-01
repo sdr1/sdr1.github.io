@@ -5,6 +5,12 @@
   url = "/"
 
   [[main]]
+  name = "Resume"
+  weight = 75
+  identifier = "resume"
+  url = "https://www.dropbox.com/scl/fi/aifg9jgg86pj2fbx2quv5/Steven_Rashin_DS_Jan_24.pdf?rlkey=1bhnjbhbib7rtlplmaoqryn43&dl=0"
+
+  [[main]]
   name = "Research"
   weight = 100
   identifier = "research"
@@ -29,7 +35,6 @@
   weight = 400
   identifier = "posts"
   url = "/post/"
-
 
   [[main]]
   name = "Contact"

@@ -4,8 +4,8 @@ author = "Steven Rashin"
 #copyright = "2024"
 description = "Data Scientist combining data science tools and social science research to study behavior"
 profilePicture = "images/rashin-headshot.png"
-#resume = "https://www.cnn.com"
-keywords = ""
+#resume = "https://www.dropbox.com/scl/fi/aifg9jgg86pj2fbx2quv5/Steven_Rashin_DS_Jan_24.pdf?rlkey=1bhnjbhbib7rtlplmaoqryn43&dl=0"
+#keywords = "these are keywords"
 favicon = "favicons/"
 #example ["css/custom.css"]
 customCss = []

@@ -1,5 +1,5 @@
 +++
-author = "Hugo Authors"
+author = "Steven Rashin"
 mainSectionsTitle = "Latest News/Tutorials"
 +++
 
@@ -7,8 +7,10 @@ I am a data scientist who specializes in applying data science methods and socia
 
 In the fall of 2023 I taught statistics and data science at the Department of Statistics and Data Science at the University of Texas, Austin.  Prior to that I was a senior scholar an the McCombs School of Business, where I studied corporate influence over the policymaking process.  My research sat at the intersection of political science, public management, and corporate political activity.  One of my more memorable projects focused on influence in financial regulation, shedding light on the extent and mechanisms through which organized interests use private information to alter public policy. For example, my research has shown that the ability to provide policy relevant information rather than organizational resources drives policy changes.  I also has ongoing projects on the Dodd-Frank Wall Street Reform Act. 
 
-Outside of work, I enjoy running, hiking, tennis, golf, cooking, music, and crossword puzzles.  As the story of my life often goes, the things I disliked when I was younger I end up loving now that I'm older.      
- 
+Outside of work, I enjoy running, hiking, tennis, golf, cooking, music, and crossword puzzles.  As the story of my life often goes, the things I disliked when I was younger I end up loving now that I'm older.   
+
+[Here's my latest resume](https://www.dropbox.com/scl/fi/aifg9jgg86pj2fbx2quv5/Steven_Rashin_DS_Jan_24.pdf?rlkey=1bhnjbhbib7rtlplmaoqryn43&dl=0)
+
 ---
 
 ## Education
