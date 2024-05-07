@@ -20,6 +20,16 @@ Here's the [project repository on GitHub](https://github.com/sdr1/Detect-Mass-Co
 
 An annoying part of webscraping is that extracting links from tables can be difficult.  Often there are links outside the table too, so you can't simply extract the links and map them directly to the table.  This script solves the problem!  [Here's the code](https://github.com/sdr1/Extract-Links-From-Table/blob/main/extract-table-links.R)
 
+## Course RAG
+
+When I was teaching, I had a problem.  Students were using ChatGPT for everything!  Sometimes they got good answers and sometimes they did not.  For example, ChatGPT sometimes gave bad answers about what controlling for actually means (specifically in the context of the Frish-Waugh-Lovell theorem).  So I created an [AI course assitant](https://github.com/sdr1/RAG).  
+Here's how this works:
+    - It takes in files from a directory.  The current version takes in powerpoints, but it can be modified to take in PDFs too.
+    - The PDFs are split into embeddings (loosely smaller chunks) via an embeddings model and stored locally.  
+    - When you ask it a query, the program searches in your documents then the LLM.  
+    - When you get an answer, you get the top 5 sources where the answers were pulled from
+
+
 ## Document Similarity 
 
 Ask me about this!  It's the basis of my PhD. 
