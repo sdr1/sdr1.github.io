@@ -1,3 +1,6 @@
 # Welcome!
 
-Hi, I'm Steve.  I'm a data scientist.  If you want to hire me, go to <www.linkedin.com/in/steven-rashin> - that's my professional website while I build this one out.  My prior website host nuked my professional website, so I have to rebuild it.
+Hi, I'm Steve.  I'm a data scientist.  This is my new website.[^1]  It can be accessed at https://sdr1.github.io or https://stevenrashin.com [^2]
+
+[^1]: If, for some reason, you were looking for my old website, it doesn't exist anymore.
+[^2]: I am aware that I have two links to the same website.  I wanted to show you/you guys (for my NYC friends)/y'all (for my Texan friends) that I bought a domain name and keep paying for it.
