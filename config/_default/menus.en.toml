@@ -8,7 +8,7 @@
   name = "Resume"
   weight = 75
   identifier = "resume"
-  url = "sdr1.github.io/Steven_Rashin_DS_May_24.pdf"
+  url = "/Steven_Rashin_DS_May_24.pdf"
 
   [[main]]
   name = "Research"
