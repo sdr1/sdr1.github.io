@@ -8,7 +8,8 @@
   name = "Resume"
   weight = 75
   identifier = "resume"
-  url = "https://www.dropbox.com/scl/fi/tht4zqcxzgmdzn5drbsqs/Steven_Rashin_DS_May_24.pdf?rlkey=2ei4k33ny1o2pd9ca75x4rv0y&dl=0"
+  url = "/rashin-ds-resume-may.pdf" 
+  #url = "https://www.dropbox.com/scl/fi/tht4zqcxzgmdzn5drbsqs/Steven_Rashin_DS_May_24.pdf?rlkey=2ei4k33ny1o2pd9ca75x4rv0y&dl=0"
 
   [[main]]
   name = "Research"

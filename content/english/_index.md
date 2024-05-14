@@ -9,7 +9,7 @@ In the fall of 2023 I taught statistics and data science at the Department of St
 
 Outside of work, I enjoy running, hiking, tennis, golf, cooking, music, and crossword puzzles.  As the story of my life often goes, the things I disliked when I was younger I end up loving now that I'm older.   
 
-[Here's my latest resume](/Steven_Rashin_DS_May_24.pdf)
+[Here's my latest resume](/rashin-ds-resume-may.pdf) 
 
 ---
 
