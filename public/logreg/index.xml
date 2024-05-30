@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Logregs on My blog</title>
+    <link>http://localhost:4143/logreg/</link>
+    <description>Recent content in Logregs on My blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language><atom:link href="http://localhost:4143/logreg/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GLMs/Logistic Regression/MLE</title>
+      <link>http://localhost:4143/logreg/logreg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:4143/logreg/logreg/</guid>
+      
+        <description>Sources For Logistic Regression: https://yury-zablotski.netlify.app/post/simple-logistic-regression/ For GLMs and Maximum Likelihood http://web.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

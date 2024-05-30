@@ -1,0 +1,1665 @@
+<!doctype html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme=""
+  
+    class="html theme--light"
+  
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=4143&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <title>
+    
+      
+        GLMs/Logistic Regression/MLE |
+      Steven Rashin
+
+  </title>
+
+  <meta name="generator" content="Hugo 0.125.4"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Steven Rashin" />
+  <meta
+    name="description"
+    content="Data Scientist combining data science tools and social science research to study behavior"
+  />
+  
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="../../scss/main.min.009f917038f30ebd1f2147e8e1dfd40fc1b799422a7869aa0da12af1fd1bf8ba.css"
+      integrity="sha256-AJ&#43;RcDjzDr0fIUfo4d/UD8G3mUIqeGmqDaEq8f0b&#43;Lo="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="../../css/markupHighlight.min.73ccfdf28df555e11009c13c20ced067af3cb021504cba43644c705930428b00.css"
+    integrity="sha256-c8z98o31VeEQCcE8IM7QZ688sCFQTLpDZExwWTBCiwA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="../../fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
+    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="../../fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
+    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="../../fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
+    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="../../fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
+    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="../../favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="http://localhost:4143/logreg/logreg/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="../../js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="../../js/anatole-theme-switcher.min.d6d329d93844b162e8bed1e915619625ca91687952177552b9b3e211014a2957.js"
+      integrity="sha256-1tMp2ThEsWLovtHpFWGWJcqRaHlSF3VSubPiEQFKKVc="
+      crossorigin="anonymous"
+    ></script>
+  
+
+  
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:4143/images/site-feature-image.png"><meta name="twitter:title" content="GLMs/Logistic Regression/MLE">
+<meta name="twitter:description" content="Sources For Logistic Regression: https://yury-zablotski.netlify.app/post/simple-logistic-regression/ For GLMs and Maximum Likelihood http://web.">
+
+
+
+  
+  <meta property="og:url" content="http://localhost:4143/logreg/logreg/">
+  <meta property="og:site_name" content="My blog">
+  <meta property="og:title" content="GLMs/Logistic Regression/MLE">
+  <meta property="og:description" content="Sources For Logistic Regression: https://yury-zablotski.netlify.app/post/simple-logistic-regression/ For GLMs and Maximum Likelihood http://web.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="logreg">
+    <meta property="og:image" content="http://localhost:4143/images/site-feature-image.png">
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "logreg",
+        "name": "GLMs\/Logistic Regression\/MLE",
+        "headline": "GLMs\/Logistic Regression\/MLE",
+        "alternativeHeadline": "",
+        "description": "
+      
+        Sources For Logistic Regression: https:\/\/yury-zablotski.netlify.app\/post\/simple-logistic-regression\/ For GLMs and Maximum Likelihood http:\/\/web.
+
+
+      
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:4143\/logreg\/logreg\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Steven Rashin"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Steven Rashin"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Steven Rashin"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Steven Rashin"
+        },
+        "copyrightYear" : "0001",
+        "dateCreated": "0001-01-01T00:00:00.00Z",
+        "datePublished": "0001-01-01T00:00:00.00Z",
+        "dateModified": "0001-01-01T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Steven Rashin",
+            "url": "http://localhost:4143/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/localhost:4143\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+        
+        "http://localhost:4143/images/site-feature-image.png"
+
+
+      
+      ]
+
+    ,
+        "url" : "http:\/\/localhost:4143\/logreg\/logreg\/",
+        "wordCount" : "6127",
+        "genre" : [ ],
+        "keywords" : [ ]
+    }
+  </script>
+
+
+</head>
+<body class="body">
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="../../images/rashin-headshot.png"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="../../">Steven Rashin</a>
+        </div>
+      
+      <div class="sidebar__introduction-description">
+        <p>Data Scientist combining data science tools and social science research to study behavior</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.linkedin.com/in/steven-rashin/"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Linkedin"
+            title="Linkedin"
+          >
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://github.com/sdr1"
+            target="_blank"
+            rel="noopener me"
+            aria-label="GitHub"
+            title="GitHub"
+          >
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="mailto:srashin@gmail.com"
+            target="_blank"
+            rel="noopener me"
+            aria-label="e-mail"
+            title="e-mail"
+          >
+            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        Steven Rashin
+        2024
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="../../js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="../../"
+              
+              title=""
+              >Bio</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="../../rashin-ds-resume-may.pdf"
+              
+              title=""
+              >Resume</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="../../research/"
+              
+              title=""
+              >Research</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="../../teaching/"
+              
+              title=""
+              >Teaching</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="../../software/"
+              
+              title=""
+              >Software</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="../../post/"
+              
+              title=""
+              >Posts/Tutorials</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="../../contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+        
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+    "
+  >
+    
+    <div class="post__content">
+      <h1>GLMs/Logistic Regression/MLE</h1>
+      <h2 id="sources">Sources</h2>
+<ul>
+<li>For Logistic Regression:
+<a href="https://yury-zablotski.netlify.app/post/simple-logistic-regression/">https://yury-zablotski.netlify.app/post/simple-logistic-regression/</a></li>
+<li>For GLMs and Maximum Likelihood
+<a href="http://web.vu.lt/mif/a.buteikis/wp-content/uploads/PE_Book/5-1-GLM.html">http://web.vu.lt/mif/a.buteikis/wp-content/uploads/PE_Book/5-1-GLM.html</a></li>
+<li>A Course on GLMs
+<a href="https://statmath.wu.ac.at/courses/heather_turner/glmCourse_001.pdf">https://statmath.wu.ac.at/courses/heather_turner/glmCourse_001.pdf</a></li>
+<li>GLM notes <a href="https://grodri.github.io/glms/notes/c3.pdf">https://grodri.github.io/glms/notes/c3.pdf</a>,
+<a href="https://grodri.github.io/glms/notes/a2.pdf">https://grodri.github.io/glms/notes/a2.pdf</a></li>
+<li>GLM textbook
+<a href="https://www.jstor.org/stable/pdf/2991772.pdf?refreqid=excelsior%3A8635ba4f19e54f467807e4f8bff1bc40&ab_segments=&origin=&initiator=&acceptTC=1">https://www.jstor.org/stable/pdf/2991772.pdf?refreqid=excelsior%3A8635ba4f19e54f467807e4f8bff1bc40&ab_segments=&origin=&initiator=&acceptTC=1</a></li>
+<li>Inference versus prediction
+<a href="https://www.stat.berkeley.edu/~aldous/157/Papers/shmueli.pdf">https://www.stat.berkeley.edu/~aldous/157/Papers/shmueli.pdf</a></li>
+<li>Algebraic properties of expectations
+<a href="https://www.stat.cmu.edu/~cshalizi/mreg/15/lectures/01/lecture-01.pdf">https://www.stat.cmu.edu/~cshalizi/mreg/15/lectures/01/lecture-01.pdf</a></li>
+<li><a href="https://www.stat.cmu.edu/~cshalizi/uADA/19/lectures/2019-03-07.html">https://www.stat.cmu.edu/~cshalizi/uADA/19/lectures/2019-03-07.html</a></li>
+<li>Fisher Scoring (i.e. fitting GLMs) from scratch
+<a href="http://www.jtrive.com/estimating-logistic-regression-coefficents-from-scratch-r-version.html">http://www.jtrive.com/estimating-logistic-regression-coefficents-from-scratch-r-version.html</a></li>
+</ul>
+<h1 id="logistic-regression-basics">Logistic Regression Basics</h1>
+<p>Logistic Regression is used for modeling data with a categorical
+response.</p>
+<p>Logistic regression predicts the probability of success.</p>
+<p>We use it when using OLS is inappropriate because the data the outcome
+variable is binary.</p>
+<p>$$\text{response} \Leftrightarrow \text{log(odds)} \Leftrightarrow \log\bigr(\frac{p}{1-p}\bigl) = \beta_0 + \beta_1X_1+\dots +\beta_k X_k $$</p>
+<h2 id="a-primerrefresher-on-probability-odds-odds-ratios">A Primer/Refresher on Probability, Odds, Odds Ratios</h2>
+<p>Probability = something happening / (something happening + something not
+happening)</p>
+<p>Odds = something happening / something not happening</p>
+<p>Log(Odds) = Log(something happening / something not happening)</p>
+<p>Log(Odds) = log(p / (1-p)) = logit!</p>
+<p>Odds ratio = odds of one thing / odds of another thing (e.g., 4/3 /
+15/20 )</p>
+<ul>
+<li>If event 1 has a p probability of success and event 2 has a q
+probability of success then the odds ratio is
+$\frac{\frac{p}{1-p}}{\frac{q}{1-q}}$. The odds-ratio tells us how
+many times are one odds differ from the other. Note that you can&rsquo;t
+directly translate odds ratios to probability without knowing the
+probability of one of the events!</li>
+</ul>
+<p>In summary, probability is bounded between 0 and 1. Odds can take any
+value between 0 and $\infty$, with 1 in the &ldquo;middle&rdquo; splitting all the
+possible odds into two segments. A small segment of odds, from 0 to 1,
+shows higher probability of failure then of success. And an (literally)
+infinite segment of odds, from 1 to $\infty$, shows higher probability
+of success then of failure. Such asymmetry is very odd and difficult to
+interpret. That is why we need the logarithm of odds. Log odds goes from
+$-\infty$ to $\infty$.</p>
+<p>Suppose an event has a probability of 50% of happening. So p = 1/2. Then
+the odds are 1/2 / 1/2 = 1/1 or 1:1. The log odds are log(1/1) = 0.
+Think of these values as the middles.</p>
+<p>If the probability is greater than 50%, then the odds are greater than
+1, and the log odds are greater than 0.</p>
+<h3 id="converting-to-probability">Converting To Probability</h3>
+<p>$$\text{Odds} = p / (1-p)$$</p>
+<p>$$p = \text{Odds} / (1 + \text{Odds} )  $$
+$$\text{logit = log(odds) = log}(\frac{p}{1-p})$$ So, to convert from
+log odds to probability, we use the following formula:</p>
+<p>$$p = \frac{e^{\text{log odds}}}{1 + e^{\text{log odds}}}$$</p>
+<h4 id="example">Example</h4>
+<p>Suppose we have odds of 20:1. 20:1 odds mean for every 20 successes
+you&rsquo;ll get 1 failure.</p>
+<p>What is the probability of success?</p>
+<p>The probability of success is odds/(1 + odds) $\rightarrow$
+(20/1)/(1+20/1) = 20/21 = 0.95</p>
+<p>Suppose we have log odds of 1.609438 (i.e. log(5)).</p>
+<p>What is the probability of success?</p>
+<p>exp(1.609438) / (1 + exp(1.609438)) =
+0.83</p>
+<h4 id="summary-of-log-odds">Summary of Log-Odds</h4>
+<p>Logistic regression uses log odds because they are:</p>
+<ol>
+<li>
+<p>Symmetric, as compared to odds</p>
+</li>
+<li>
+<p>Centered around zero as compared to odds or probabilities, which
+makes their sign (+/-) interpretable</p>
+</li>
+<li>
+<p>Linear and infinite, as compared to probabilities, which is highly
+non-linear and is constrained between 0 and 1</p>
+</li>
+<li>
+<p>Can be easily transformed to odds or probabilities which are easier
+to understand</p>
+</li>
+</ol>
+<h1 id="logit-model">Logit model</h1>
+<p>Logistic regression uses a logit $\log(\frac{p}{1-p})$ to model a linear
+combination of predictors, which produces a straight line of log(odds).
+(That is, like linear regression, logistic regression fits a straight
+line/plane/hyperplane - called a decision boundary in machine learning).
+This line maximizes the likelihood of the coefficients given the data.</p>
+<p>How do we do this?</p>
+<ol>
+<li>
+<p>We start with the following model:
+$y/\text{response} \rightarrow \text{Log}(\text{odds}) = \text{Log}(\frac{p}{1-p}) = \beta_0 + \beta_1 X_1$
+where
+$p = \frac{e^{X\beta}}{1+e^{X\beta}} = \frac{1}{1+e^{-X\beta}}$</p>
+</li>
+<li>
+<p>In the bivariate case (i.e. one response and one predictor), these
+probabilities are the likelihoods of the observed predictor-values
+(i.e. X&rsquo;s) after their projection from the x-axis onto the log(odds)
+and then onto the s-curve.</p>
+</li>
+</ol>
+<ul>
+<li>Why log odds? &ldquo;The probabilities can be expressed in the form of
+lod-odds. We need log-odds because they are linear instead of
+s-curvy (and our estimation procedure - glm - doesn&rsquo;t estimate
+curves). Thus, since the probability is just a transformation of the
+log-odds, we could build a linear model (with intercept and slope)
+around the log-odds, and then re-express log-odds in terms of
+probabilities if needed.&rdquo;</li>
+</ul>
+<p>The log-odds line does a great job in modelling the outcome/y. However,
+it&rsquo;s hard to directly interpret (i.e. what does a log odds of 0.5 mean
+to you?). This is why we need predicted probabilites to interpret the
+results! - If the log odds = 0.5, we can convert that to probabilities
+in the following way: Suppose log(p/(1-p)) = 0.5. Then p = exp(0.5) /
+(1 + exp(0.5)) = 62 percentage points. This is intuitive!</p>
+<p>In sum, a straight lod-odds line is making a good job in modelling the
+outcome variable, while it does a bad job in explaining what does a
+particular predictor value means for the outcome. So, to make it
+interpretable, we transform the log odds into probabilities. Since we
+can&rsquo;t model the probability directly we need the lod-odds for modelling,
+and probabilities for reporting the results.</p>
+<p>(Note ``Likelihood is the hypothetical probability that an event that
+has already occurred would yield a specific outcome. The concept differs
+from that of a probability in that a probability refers to the
+occurrence of future events, while a likelihood refers to past events
+with known outcomes.&quot; <a href="https://mathworld.wolfram.com/Likelihood.html">https://mathworld.wolfram.com/Likelihood.html</a>. A
+likelihood function L(a) is the probability or probability density for
+the occurrence of a sample configuration $x_1, &hellip;, x_n$ given that the
+probability density f(x;a) with parameter a is known,
+$L(a)=f(x_1;a)&hellip;f(x_n;a)$ )</p>
+<p>See: -
+<a href="https://yury-zablotski.netlify.app/post/how-logistic-regression-works/">https://yury-zablotski.netlify.app/post/how-logistic-regression-works/</a></p>
+<h3 id="show-the-difference-between-log-odds-and-probability">Show the difference between log odds and probability</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">#https://bookdown.org/pdr_higgins/rmrwr/logistic-regression-and-broom-for-tidying-models.html</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#performance::check_model(m, panel = F)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># add predictions to the original data</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># visualize log-odds and probabilities to see their connection</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">m</span> <span class="o">&lt;-</span> <span class="nf">glm</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="n">am</span> <span class="o">~</span> <span class="n">mpg</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="nf">binomial</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># add predictions to the original data</span>
+</span></span><span class="line"><span class="cl"><span class="n">mtcars</span> <span class="o">&lt;-</span> <span class="n">mtcars</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">mutate</span><span class="p">(</span><span class="n">log_odds</span> <span class="o">=</span> <span class="nf">predict</span><span class="p">(</span><span class="n">m</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">         <span class="c1"># below you also could have used plogis(predict(m))</span>
+</span></span><span class="line"><span class="cl">         <span class="c1"># if we use predict(m) without specifying type, we get logit (log(p/(1-p)))</span>
+</span></span><span class="line"><span class="cl">         <span class="n">preds_prob</span> <span class="o">=</span> <span class="nf">predict</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&#34;response&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">         <span class="n">odds</span> <span class="o">=</span> <span class="n">preds_prob</span> <span class="o">/</span> <span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">preds_prob</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># visualize log-odds and probabilities to see their connection</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="n">mtcars</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span> <span class="n">am</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;orange&#34;</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span> <span class="n">preds_prob</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_line</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span> <span class="n">preds_prob</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span> <span class="n">log_odds</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;blue&#34;</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_line</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span> <span class="n">log_odds</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;blue&#34;</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># geom_point(aes(mpg, odds), color = &#34;darkgreen&#34;)+</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># geom_line(aes(mpg, odds), color = &#34;darkgreen&#34;)+</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span> <span class="o">=</span> <span class="m">21.5</span><span class="p">,</span> <span class="n">linetype</span> <span class="o">=</span> <span class="s">&#34;dotted&#34;</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span> <span class="n">linetype</span> <span class="o">=</span> <span class="s">&#34;dotted&#34;</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme_minimal</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#performance::check_model(m)</span>
+</span></span></code></pre></div><img src="figs/cars-1.png" style="width:100.0%" data-fig-align="center" data-fig-pos="htbp" />
+<p>The plot above provides a good explanation of what&rsquo;s going on. We start
+with the orange dots &ndash; these are the original (x,y) pairs. Notice how
+all of the dots are in the same x space - the entire point of this plot
+(and of logistic regression), is translating those orange dots - the
+original y&rsquo;s or 0/1&rsquo;s - into probabilities via logistic odds. We do that
+in two steps - first we turn the orange dots into log(odds) using a
+generalized linear model (i.e we project them onto the blue line). Then
+we take those log odds and transform them into predicted probabilities.</p>
+<p>In sum:</p>
+<ul>
+<li>The orange dots are the original data &ndash; the (x,y) pairs</li>
+<li>The blue line is a transformation of the dots into log odds from the
+logit model</li>
+<li>The black line are the predicted probabilities from the logit model
+(i.e. $\frac{e^{\text{log odds}}}{1 + e^{\text{log odds}}}$)</li>
+</ul>
+<p>Zooming in what we want, for $\hat{y}$ and $\hat{\beta}$ tasks, is the
+S-curve. The interpretation is as easy as this: if the car has an mpg of
+30 there is a 93% probability (dotted blue lines), that it has a manual
+transmission, while low mpg, of let&rsquo;s say 15 (dotted red lines), shows
+only 12% probability of this car to have a manual transmission.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="n">mtcars</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span> <span class="n">am</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;orange&#34;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">5</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span> <span class="n">preds_prob</span><span class="p">),</span> <span class="n">size</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_line</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span> <span class="n">preds_prob</span><span class="p">),</span> <span class="n">size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span> <span class="o">=</span> <span class="m">0.93</span><span class="p">,</span> <span class="n">linetype</span> <span class="o">=</span> <span class="s">&#34;dotted&#34;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;blue&#34;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span> <span class="o">=</span> <span class="m">30</span><span class="p">,</span> <span class="n">linetype</span> <span class="o">=</span> <span class="s">&#34;dotted&#34;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;blue&#34;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span> <span class="o">=</span> <span class="m">0.12</span><span class="p">,</span> <span class="n">linetype</span> <span class="o">=</span> <span class="s">&#34;dotted&#34;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;red&#34;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span> <span class="o">=</span> <span class="m">15</span><span class="p">,</span> <span class="n">linetype</span> <span class="o">=</span> <span class="s">&#34;dotted&#34;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;red&#34;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme_minimal</span><span class="p">()</span>
+</span></span></code></pre></div><img src="figs/unnamed-chunk-1-1.png" style="width:100.0%" data-fig-align="center" data-fig-pos="htbp" />
+<h2 id="logit-assumptionswhat-happens-when-violatedhow-to-check">Logit Assumptions/What Happens When Violated/How to Check</h2>
+<p>What do we need to assume to use a logit model?</p>
+<ol>
+<li>No dependent observations. &ldquo;The assumption that the response
+variables $y_1, . . . , y_n$ are independent is, however, too
+strong. In many applications, these variables are observed on nodes
+of a network, or some spatial or temporal domain, and are dependent.
+Examples abound in financial and meteorological applications, and
+dependencies naturally arise in social networks through peer
+effects, whose study has recently exploded in topics as diverse as
+criminal activity (see e.g. [24]), welfare participation (see e.g.
+[2]), school achievement (see e.g. [36]), participation in
+retirement plans [18], and obesity (see e.g. [39, 11]).</li>
+</ol>
+<p>(Consequences) If this is violated then $E(Y_{ij} | X_i)$ won&rsquo;t be
+correct - so you&rsquo;re not estimating a population mean! If violated,
+GLMM - generalized linear mixed effect models should be applied.</p>
+<p>See: -
+<a href="https://faculty.washington.edu/heagerty/Courses/b571/handouts/LM-WLS+EDA.pdf">https://faculty.washington.edu/heagerty/Courses/b571/handouts/LM-WLS+EDA.pdf</a></p>
+<ul>
+<li><a href="https://yury-zablotski.netlify.app/post/mixed-effects-models-4/">https://yury-zablotski.netlify.app/post/mixed-effects-models-4/</a></li>
+<li><a href="http://people.csail.mit.edu/costis/dependent-regression.pdf">http://people.csail.mit.edu/costis/dependent-regression.pdf</a></li>
+</ul>
+<p>(Checking) No formal test that I can find. So you have to think about
+the data!</p>
+<p>(What to do) GLMM or this procedure
+<a href="http://people.csail.mit.edu/costis/dependent-regression.pdf">http://people.csail.mit.edu/costis/dependent-regression.pdf</a></p>
+<ol>
+<li>No multicollinearity among predictors.</li>
+</ol>
+<p>(Consequences) The betas aren&rsquo;t interpretable. This is a problem for
+explaining - not for prediction. $\beta_1$ and $\beta_2$ could be 10 and
+0, or 5 and 5, or 7 and 3, since that would yield the same result p
+(which is $\frac{1}{1+e^{logit}}$, and therefore the same error. That is
+why you generally do not want to use data that is multicollinear.
+Therefore you could call a model that does not have collinearity a
+&lsquo;better&rsquo; model.</p>
+<p>On the other hand, when we&rsquo;re focused on predicting the &lsquo;p&rsquo; as we would
+be for machine learning/predictive modeling, it does not matter that we
+can&rsquo;t interpret the betas. What matters is that &lsquo;p&rsquo; is as close to the
+true &lsquo;p&rsquo; as possible.</p>
+<p>See: -
+<a href="https://stats.stackexchange.com/questions/169943/why-can-multicollinearity-be-a-problem-for-logistic-regression">https://stats.stackexchange.com/questions/169943/why-can-multicollinearity-be-a-problem-for-logistic-regression</a></p>
+<ul>
+<li><a href="https://www.stat.berkeley.edu/~aldous/157/Papers/shmueli.pdf">https://www.stat.berkeley.edu/~aldous/157/Papers/shmueli.pdf</a></li>
+</ul>
+<p>(Checking) This can be checked with Variation Inflation Factor (VIF). If
+VIF of any variable is above 5, be concerned and find out which two
+variables have similar information.</p>
+<ol>
+<li>No influential values (extreme values or outliers) in the continuous
+predictors.</li>
+</ol>
+<p>(Consequences) The betas are incorrect/distorted</p>
+<p>(Checking) This can be assessed by converting the continuous predictors
+to standardized scores, and removing values below -3.29 or greater than
+3.29.</p>
+<p>See: -
+<a href="https://us.sagepub.com/sites/default/files/upm-assets/17840_book_item_17840.pdf">https://us.sagepub.com/sites/default/files/upm-assets/17840_book_item_17840.pdf</a></p>
+<ol>
+<li>Linear relationship between continuous predictor variables and the
+logit of the outcome</li>
+</ol>
+<p>(Consequences) The model describes your data poorly. You can have non
+linear variables but they must be transformed so as to be linearly
+related to your outcome.</p>
+<p>(Checking) This can be checked using two plots - one making sure the
+predictors are linear and looking at a QQ plot of the residuals because
+``an interesting property of Standardized Pearson Residuals is that
+they have an approximate Standard Normal distribution if the model fits
+(Agresti, 2002)&rdquo;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">m</span> <span class="o">&lt;-</span> <span class="nf">glm</span><span class="p">(</span><span class="n">am</span><span class="o">~</span><span class="n">mpg</span><span class="o">+</span><span class="n">drat</span><span class="p">,</span> <span class="n">mtcars</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="nf">binomial</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># linear in the predictors</span>
+</span></span><span class="line"><span class="cl"><span class="n">mtcars</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">  <span class="n">dplyr</span><span class="o">::</span><span class="nf">select</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span> <span class="n">drat</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">mutate</span><span class="p">(</span><span class="n">log_odds</span> <span class="o">=</span> <span class="nf">predict</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">pivot_longer</span><span class="p">(</span><span class="o">-</span><span class="n">log_odds</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">log_odds</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">()</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_smooth</span><span class="p">(</span><span class="n">method</span> <span class="o">=</span> <span class="n">lm</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">name</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">theme_minimal</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># QQ plot </span>
+</span></span><span class="line"><span class="cl"><span class="nf">plot</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">which</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+</span></span></code></pre></div><img src="figs/unnamed-chunk-2-1.png" style="width:100.0%" data-fig-align="center" data-fig-pos="htbp" />
+<img src="figs/unnamed-chunk-2-2.png" style="width:100.0%" data-fig-align="center" data-fig-pos="htbp" />
+<p>See:</p>
+<ul>
+<li><a href="https://www.lexjansen.com/scsug/2018/Shreiber-Gregory-SCSUG2018-Assumption-Violations.pdf">https://www.lexjansen.com/scsug/2018/Shreiber-Gregory-SCSUG2018-Assumption-Violations.pdf</a></li>
+<li><a href="https://faculty.washington.edu/heagerty/Courses/b571/handouts/LM-WLS+EDA.pdf">https://faculty.washington.edu/heagerty/Courses/b571/handouts/LM-WLS+EDA.pdf</a></li>
+<li><a href="https://stats.stackexchange.com/questions/32285/assumptions-of-generalised-linear-model">https://stats.stackexchange.com/questions/32285/assumptions-of-generalised-linear-model</a></li>
+</ul>
+<h1 id="generalized-linear-models-glms">Generalized Linear Models (GLMs)</h1>
+<p>Logits are a type of generalized linear models (GLMs). Generalized
+linear models (GLMs) (McCullagh and Nelder 1989) extend the linear
+regression model so as to accommodate binary and count dependent
+variables.</p>
+<p>In a Generalized Linear Model, the response may have any distribution
+from the exponential family, and rather than assuming the mean is a
+linear function of the explnatory variables, we assume that a function
+of the mean, or the link function, is a linear function of the
+explnatory variables.
+<a href="http://www.jtrive.com/estimating-logistic-regression-coefficents-from-scratch-r-version.html">http://www.jtrive.com/estimating-logistic-regression-coefficents-from-scratch-r-version.html</a></p>
+<p>Maximum likelihood is asymptotically efficient, meaning that its
+parameter estimates converge on the truth as quickly as possible
+<a href="https://www.stat.cmu.edu/~cshalizi/mreg/15/lectures/06/lecture-06.pdf">https://www.stat.cmu.edu/~cshalizi/mreg/15/lectures/06/lecture-06.pdf</a></p>
+<p>An important practical feature of generalized linear models is that they
+can all be fit to data using the same algorithm, a form of iteratively
+re-weighted least squares.</p>
+<p>There are three components to a GLM:</p>
+<p><strong>Random Component</strong> &ndash; refers to the probability distribution of the
+response variable (Y); e.g. binomial distribution for Y in the binary
+logistic regression.</p>
+<p><strong>Systematic Component</strong> &ndash; refers to the explanatory variables
+$(X_1, X_2, &hellip; X_k)$ as a combination of linear predictors - e.g.
+$\beta_0 + \beta_1x1 + \beta_2x2$</p>
+<p><strong>Link Function</strong>, $\eta$ or $g(\mu)$ &ndash; The link function relates the
+linear predictor to some parameter ($\theta$) of the distribution for Y
+(usually the mean). Let $g(·)$ be the link function and let
+$E(Y) = \theta$ be the mean of distribution for $Y$.</p>
+<p>The link function specifies the link between random and systematic
+components. It says how the expected value of the response relates to
+the linear predictor of explanatory variables; e.g.
+$\eta = \text{logit}(p)$ for logistic regression. I.e. it transforms the
+dependent variable into a linear combination of the independent
+variables.</p>
+<h3 id="how-to-get-coefficients-and-errors-for-a-glm">How to Get Coefficients and Errors for a GLM</h3>
+<ol>
+<li>Specify a distribution for Y. I.e. assume our data was generated
+from some distribution:
+<ul>
+<li>Continuous and Unbounded: Normal</li>
+<li>Binary: Bernoulli</li>
+<li>Event Count: Poisson</li>
+<li>Duration: Exponential</li>
+<li>Ordered Categories: Normal with observation mechanism</li>
+<li>Unordered Categories: Multinomial</li>
+</ul>
+</li>
+<li>Specify a linear predictor
+<ul>
+<li>We are interested in allowing some parameter of the distribution
+$\theta$ to vary as a (linear) function of covariates. So we
+specify a linear predictor.</li>
+<li>i.e. $X\beta = \beta_0 + x_1\beta_1+x_2\beta_2+\dots+x_n\beta_n$</li>
+</ul>
+</li>
+<li>Specify a link function
+<ul>
+<li>The link function relates the linear predictor to some parameter
+$\theta$ of the distribution for Y (usually the mean).</li>
+<li>$g(\theta)=X\beta$</li>
+<li>$\theta = g^{-1}(X\beta)$</li>
+<li>Together with the linear predictor this forms the systematic
+component</li>
+<li>For logistic regression the link is
+$\ln\frac{\pi}{1-\pi}=X\beta$
+<ul>
+<li>This means the inverse link is
+$\pi = \frac{1}{1+e^{-X\beta}}$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Estimate Parameters via Maximum Likelihood
+<ul>
+<li>We do this in three steps:
+<ol>
+<li>Writing down the likelihood</li>
+<li>Estimating the parameters by maximizing the likelihood</li>
+<li>Getting an estimate of the variance by inverting the
+negative Hessian</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>Simulate or Calculate Quantities of Interest</li>
+</ol>
+<p>Source:
+<a href="https://bstewart.scholar.princeton.edu/sites/g/files/toruqf4016/files/bstewart/files/lecture4_glm_slides.pdf">https://bstewart.scholar.princeton.edu/sites/g/files/toruqf4016/files/bstewart/files/lecture4_glm_slides.pdf</a></p>
+<h3 id="example-logit">Example: Logit</h3>
+<p>Binary Logistic regression models how the odds of &ldquo;success&rdquo; for a binary
+response variable Y depend on a set of explanatory variables:
+$\text{logit}(p) = \text{log}(\frac{p}{1-p})=\beta_0 + \beta_1 x_i$</p>
+<ol>
+<li>
+<p>Specify a distribution for Y. I.e. specify the stochastic/random
+component. The distribution of the response variable is assumed to
+be binomial with a single trial and success probability p</p>
+<ol>
+<li>$Y_i \sim \text{Bernoulli}(y_i|\pi_i) = \pi^{y_i}(1-\pi_i)^{1-y_i}$</li>
+<li>The above implies that $Y_i = \pi_i$ for y = 1 and $1-\pi_i$ for
+y = 0</li>
+</ol>
+</li>
+<li>
+<p>Specify a linear predictor / systematic component. Here we note that
+the explanatory variable (can be continuous, discrete, or both) is
+linear in the parameters $\beta_0 + \beta x_i$</p>
+<ol>
+<li>$X_i\beta$</li>
+</ol>
+</li>
+<li>
+<p>Specify a link function</p>
+<ol>
+<li>$Pr(Y_i = 1|\beta) \equiv E(Y_i) \equiv \pi_i = \frac{1}{1 + e^{-x_i\beta}}$</li>
+<li>We&rsquo;re assuming $Y_i$ and $Y_j$ are independent conditional on X.</li>
+<li>We can use different link functions - for example, for probit
+it&rsquo;s $\Phi(X\beta)$ &ndash; the CDF of the standard normal
+distribution</li>
+</ol>
+</li>
+<li>
+<p>Derive maximum likelihood estimate for $\beta$
+$$l(\beta|Y) = \log L(\beta|Y_i)$$ $$= \log p(Y_i|\beta)$$
+$$= \log \prod_{i=1}^n \underbrace{p(Y_i|\beta)}<em>{\text{Replace with dist. of Y - bernoilli for binary}}$$
+$$= \log \prod</em>{i=1}^n \underbrace{\pi_i^{y_i}(1-\pi_i)^{1-y_i}}<em>{\text{Replace }\pi_i \text{ with link function}}$$
+$$= \log \prod</em>{i=1}^n \underbrace{\frac{1}{1 + e^{-x_i\beta}}^{y_i}(1-\frac{1}{1 + e^{-x_i\beta}})^{1-y_i}}_{\text{Now use log rules to simplify}}$$</p>
+<p>$$ = \sum_{i=1}^n y_i \log (\frac{1}{1 + e^{-x_i\beta}}) + (1-y_i) \log (1-\frac{1}{1 + e^{-x_i\beta}})$$
+$$ = \sum_{i=1}^n -y_i \log ({1 + e^{-x_i\beta}}) + (1-y_i) \log (1-\frac{1}{1 + e^{-x_i\beta}})$$
+$$ = - \sum_{i=1}^n \log (1+ e^{(1-2y_i)x_i\beta})$$</p>
+</li>
+</ol>
+<p>The above cannot be maximized analytically (i.e. by taking the
+derivative with respect to $\beta$, setting the equation to 0, and
+solving). So we use a numeric approximation - in R it&rsquo;s Fischer scoring.</p>
+<h3 id="example-ols-with-canonical-link">Example: OLS with canonical link</h3>
+<p>Note, this is just regular OLS!</p>
+<ol>
+<li>Specify a distribution for Y. I.e. specify the sthocastic/random
+component. The distribution of the response variable is assumed to
+be binomial with a single trial and success probability p
+<ol>
+<li>$Y_i \sim \text{N}(X\beta, \sigma^2)= \frac{1}{\sigma(2\pi)^{1/2}}\text{exp}(\frac{y_i-\mu}{2\sigma^2})$</li>
+</ol>
+</li>
+<li>Specify a linear predictor / systematic component. Here we note that
+the explanatory variable (can be continuous, discrete, or both) is
+linear in the parameters $\beta_0 + \beta x_i$
+<ol>
+<li>$\beta&rsquo;X$</li>
+</ol>
+</li>
+<li>Specify a link function
+<ol>
+<li>identity link $\mu = \beta&rsquo;X$</li>
+<li>Note we&rsquo;re going to replace the $\mu$ in 1 above with $X\beta$</li>
+</ol>
+</li>
+<li>Derive maximum likelihood estimate for $\beta$</li>
+</ol>
+<p>Likelihood
+$L = \prod_{i=1}^{n} = \frac{1}{\sigma\sqrt{2\pi}}\text{exp}(\frac{y_i-\mu}{2\sigma^2})$</p>
+<p>Now replace $\mu$ with $\beta&rsquo;X$
+$$L = \prod_{i=1}^{n} \frac{1}{\sigma\sqrt{2\pi}}\text{exp}(\frac{(y_i-\beta&rsquo;x_i)^2}{2\sigma^2}) $$
+Take logs
+$$\log(L) = \sum_{i=1}^{n} \log(\frac{1}{\sigma\sqrt{2\pi}}) + \log(\text{exp}(\frac{(y_i-\beta&rsquo;x_i)^2}{2\sigma^2})) $$
+Use log rules to simplify</p>
+<p>$$\log(L) = \sum_{i=1}^{n} -\log(-\sigma\sqrt{2\pi}) + (\frac{(y_i-\beta&rsquo;x_i)^2}{2\sigma^2}) $$
+Now we want to find $\beta$, let&rsquo;s make this easier by replacing
+$\sum (y_i-\beta&rsquo;x_i)^2$ with $(Y-X\beta)&rsquo;(Y-X\beta)$</p>
+<p>$$\log(L) = -n\log(-\sigma\sqrt{2\pi}) + \frac{1}{2\sigma^2}\times(Y-X\beta)&rsquo;(Y-X\beta) $$
+Now we can take the partial with respect to it, set it equal to 0, and
+solve</p>
+<p>$$\frac{\partial l}{\partial \beta} = \frac{1}{2\sigma^2} \times (-2 X&rsquo;Y + 2 \beta X&rsquo;X) = 0$$
+Now, solve like normal $$\beta = (X&rsquo;X)^{-1}X&rsquo;Y$$</p>
+<h3 id="example-probit">Example: Probit</h3>
+<ol>
+<li>Specify a distribution for Y. I.e. specify the stochastic/random
+component. The distribution of the response variable is assumed to
+be binomial with a single trial and success probability p
+<ol>
+<li>$Y_i \sim \text{Bernoulli}(y_i|\pi_i) = \pi^{y_i}(1-\pi_i)^{1-y_i}$</li>
+<li>The above implies that $Y_i = \pi_i$ for y = 1 and $1-\pi_i$ for
+y = 0</li>
+</ol>
+</li>
+<li>Specify a linear predictor / systematic component. Here we note that
+the explanatory variable (can be continuous, discrete, or both) is
+linear in the parameters $\beta_0 + \beta x_i$
+<ol>
+<li>$X_i\beta$</li>
+</ol>
+</li>
+<li>Specify a link function
+<ol>
+<li>$Pr(Y_i = 1|\beta) \equiv E(Y_i) \equiv \pi_i = \Phi(X\beta)$ &ndash;
+the CDF of the standard normal distribution</li>
+<li>We&rsquo;re assuming $Y_i$ and $Y_j$ are independent conditional on X.</li>
+</ol>
+</li>
+<li>Derive maximum likelihood estimate for $\beta$</li>
+</ol>
+<p>$$L = \pi^{y_i}(1 - \pi)^{1-y_i} $$
+$$\log(L) = \sum\Phi(X\beta)^{y_i}(1-\Phi(X\beta))^{1-y_i} $$ For just
+optim, we can stop here
+$$\log(L) = \sum y_i \log \Phi(X\beta) + (1-y_i) \log (1-\Phi(X\beta)) $$</p>
+<h3 id="coding-probit-logit">Coding Probit, Logit</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># get link functions for ols, logit, probit</span>
+</span></span><span class="line"><span class="cl"><span class="n">ll.logit</span> <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="n">logl</span> <span class="o">&lt;-</span> <span class="m">-1</span> <span class="o">*</span> <span class="nf">sum</span><span class="p">(</span><span class="nf">log</span><span class="p">(</span><span class="m">1</span> <span class="o">+</span> <span class="nf">exp</span><span class="p">((</span><span class="m">1-2</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">X</span><span class="o">%*%</span><span class="n">beta</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">return</span><span class="p">(</span><span class="n">logl</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ll.probit</span> <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="n">phi</span> <span class="o">&lt;-</span> <span class="nf">pnorm</span><span class="p">(</span><span class="n">X</span><span class="o">%*%</span><span class="n">beta</span><span class="p">,</span> <span class="n">log</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">opp.phi</span> <span class="o">&lt;-</span> <span class="nf">pnorm</span><span class="p">(</span><span class="n">X</span><span class="o">%*%</span><span class="n">beta</span><span class="p">,</span> <span class="n">log</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">lower.tail</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">logl</span> <span class="o">&lt;-</span> <span class="nf">sum</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">phi</span> <span class="o">+</span> <span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">opp.phi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">return</span><span class="p">(</span><span class="n">logl</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">&lt;-</span> <span class="nf">model.matrix</span><span class="p">(</span><span class="o">~</span> <span class="n">mpg</span> <span class="o">+</span> <span class="n">wt</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">opt.logit</span> <span class="o">&lt;-</span> <span class="nf">optim</span><span class="p">(</span><span class="n">par</span> <span class="o">=</span> <span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="nf">ncol</span><span class="p">(</span><span class="n">X</span><span class="p">)),</span> <span class="n">fn</span> <span class="o">=</span> <span class="n">ll.logit</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">mtcars</span><span class="o">$</span><span class="n">am</span><span class="p">,</span> <span class="n">control</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">fnscale</span> <span class="o">=</span> <span class="m">-1</span><span class="p">),</span> <span class="n">hessian</span> <span class="o">=</span> <span class="bp">T</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s">&#34;BFGS&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">opt.probit</span> <span class="o">&lt;-</span> <span class="nf">optim</span><span class="p">(</span><span class="n">par</span> <span class="o">=</span> <span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="nf">ncol</span><span class="p">(</span><span class="n">X</span><span class="p">)),</span> <span class="n">fn</span> <span class="o">=</span> <span class="n">ll.probit</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">mtcars</span><span class="o">$</span><span class="n">am</span><span class="p">,</span> <span class="n">control</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">fnscale</span> <span class="o">=</span> <span class="m">-1</span><span class="p">),</span> <span class="n">hessian</span> <span class="o">=</span> <span class="bp">T</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s">&#34;BFGS&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">glm</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="n">am</span> <span class="o">~</span> <span class="n">mpg</span> <span class="o">+</span> <span class="n">wt</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="nf">binomial</span><span class="p">(</span><span class="n">link</span> <span class="o">=</span> <span class="s">&#34;probit&#34;</span><span class="p">))</span>
+</span></span></code></pre></div><pre><code>Call:  glm(formula = am ~ mpg + wt, family = binomial(link = &quot;probit&quot;), 
+    data = mtcars)
+
+Coefficients:
+(Intercept)          mpg           wt  
+    13.5226      -0.1649      -3.4088  
+
+Degrees of Freedom: 31 Total (i.e. Null);  29 Residual
+Null Deviance:      43.23 
+Residual Deviance: 17.46    AIC: 23.46
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">glm</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="n">am</span> <span class="o">~</span> <span class="n">mpg</span> <span class="o">+</span> <span class="n">wt</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="nf">binomial</span><span class="p">(</span><span class="n">link</span> <span class="o">=</span> <span class="s">&#34;logit&#34;</span><span class="p">))</span>
+</span></span></code></pre></div><pre><code>Call:  glm(formula = am ~ mpg + wt, family = binomial(link = &quot;logit&quot;), 
+    data = mtcars)
+
+Coefficients:
+(Intercept)          mpg           wt  
+    25.8866      -0.3242      -6.4162  
+
+Degrees of Freedom: 31 Total (i.e. Null);  29 Residual
+Null Deviance:      43.23 
+Residual Deviance: 17.18    AIC: 23.18
+</code></pre>
+<h3 id="comparing-lpm-probit-logit">Comparing LPM, Probit, Logit</h3>
+<p>So how do a linear probability model, logit and probit compare? See the
+following illustration where the lpm is in green, the logit is in blue,
+and the probit is in orange.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">latex2exp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#simulate data - start with random x</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># see https://data.library.virginia.edu/simulating-a-logistic-regression-model/</span>
+</span></span><span class="line"><span class="cl"><span class="n">x1</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># now make the &#34;true&#34; model</span>
+</span></span><span class="line"><span class="cl"><span class="n">xb</span> <span class="o">&lt;-</span> <span class="m">2</span> <span class="o">+</span> <span class="m">5</span> <span class="o">*</span> <span class="n">x1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># convert to probability, so we can simulate probabilities in the next step and have them be related to the betas</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">&lt;-</span> <span class="m">1</span><span class="o">/</span><span class="p">(</span><span class="m">1</span><span class="o">+</span> <span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="n">xb</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># now draw 0/1&#39;s based on the data above </span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">rbinom</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="m">1000</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">prob</span> <span class="o">=</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sim_data</span> <span class="o">&lt;-</span> <span class="nf">tibble</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">x1</span> <span class="o">=</span> <span class="n">x1</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># run the models</span>
+</span></span><span class="line"><span class="cl"><span class="n">logit_ex</span> <span class="o">&lt;-</span> <span class="nf">glm</span><span class="p">(</span><span class="n">y</span> <span class="o">~</span> <span class="n">x1</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">sim_data</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="nf">binomial</span><span class="p">(</span><span class="n">link</span> <span class="o">=</span> <span class="s">&#34;logit&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">probit_ex</span> <span class="o">&lt;-</span> <span class="nf">glm</span><span class="p">(</span><span class="n">y</span> <span class="o">~</span> <span class="n">x1</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">sim_data</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="nf">binomial</span><span class="p">(</span><span class="n">link</span> <span class="o">=</span> <span class="s">&#34;probit&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">lpm_ex</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">y</span><span class="o">~</span><span class="n">x1</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">sim_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sim_data</span> <span class="o">%&lt;&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">mutate</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logit_preds_prob</span> <span class="o">=</span> <span class="nf">predict</span><span class="p">(</span><span class="n">logit_ex</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&#34;response&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">probit_preds_prob</span> <span class="o">=</span> <span class="nf">predict</span><span class="p">(</span><span class="n">probit_ex</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&#34;response&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># now plot all</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="n">sim_data</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">))</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">()</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">  <span class="c1"># add lpm</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_abline</span><span class="p">(</span><span class="n">slope</span> <span class="o">=</span> <span class="n">lpm_ex</span><span class="o">$</span><span class="n">coefficients[2]</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">=</span> <span class="n">lpm_ex</span><span class="o">$</span><span class="n">coefficients[1]</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;darkgreen&#34;</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_line</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">logit_preds_prob</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;blue&#34;</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_line</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">probit_preds_prob</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;orange&#34;</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">annotate</span><span class="p">(</span><span class="n">geom</span><span class="o">=</span><span class="s">&#34;text&#34;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="m">0.45</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&#34;Beta hat LPM:&#34;</span><span class="p">,</span> <span class="nf">round</span><span class="p">(</span><span class="n">lpm_ex</span><span class="o">$</span><span class="n">coefficients[2]</span><span class="p">,</span><span class="m">2</span><span class="p">))),</span> <span class="n">color</span><span class="o">=</span><span class="s">&#34;darkgreen&#34;</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">annotate</span><span class="p">(</span><span class="n">geom</span><span class="o">=</span><span class="s">&#34;text&#34;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="m">0.30</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&#34;Beta hat Logit:&#34;</span><span class="p">,</span> <span class="nf">round</span><span class="p">(</span><span class="n">logit_ex</span><span class="o">$</span><span class="n">coefficients[2]</span><span class="p">,</span><span class="m">2</span><span class="p">))),</span> <span class="n">color</span><span class="o">=</span><span class="s">&#34;blue&#34;</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">annotate</span><span class="p">(</span><span class="n">geom</span><span class="o">=</span><span class="s">&#34;text&#34;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="m">0.15</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&#34;Beta hat Probit:&#34;</span><span class="p">,</span> <span class="nf">round</span><span class="p">(</span><span class="n">probit_ex</span><span class="o">$</span><span class="n">coefficients[2]</span><span class="p">,</span><span class="m">2</span><span class="p">))),</span> <span class="n">color</span><span class="o">=</span><span class="s">&#34;orange&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">theme_minimal</span><span class="p">()</span>
+</span></span></code></pre></div><img src="figs/Comapring%20logit,%20probit,%20lpm-1.png" style="width:100.0%" data-fig-align="center" data-fig-pos="htbp" />
+<p>What do we get from the above?</p>
+<ul>
+<li>LPM goes outside of [0, 1] for extreme values of $X_i$</li>
+<li>LPM underestimates the marginal effect near center and overpredicts
+near extremes</li>
+<li>Logit has slightly fatter tails than probit, but no practical
+difference</li>
+<li>Note that $\hat{\beta}$ are completely different between the models</li>
+</ul>
+<h3 id="glm-properties">GLM properties</h3>
+<ol>
+<li>It&rsquo;s the minimum variance unbiased estimator (MVUE)</li>
+<li>Invariance to reparameterization
+<ul>
+<li>You can estimate $\sigma$ with $\hat{\sigma}$ and calculate
+$\hat{\sigma^2}$ or estimate $\hat{\sigma^2}$ and both are
+Maximum Likelihood Estimates</li>
+</ul>
+</li>
+<li>Invariance to sampling plans</li>
+</ol>
+<h3 id="asymptotic-glm-properties">Asymptotic GLM properties</h3>
+<ol>
+<li>Consistency (from the Law of Large Numbers). As
+$n \rightarrow \infty$, the sampling distribution of the MLE
+collapses to a spike over the parameter value</li>
+<li>Asymptotic normality
+<ul>
+<li>as $n \rightarrow \infty$ the distribution of MLE / se(MLE)
+converges to a Normal</li>
+</ul>
+</li>
+<li>Asymptotic efficiency (i.e. minimum asymptotic variance)</li>
+</ol>
+<p>See
+<a href="https://bstewart.scholar.princeton.edu/sites/g/files/toruqf4016/files/bstewart/files/lecture3_inference_slides.pdf">https://bstewart.scholar.princeton.edu/sites/g/files/toruqf4016/files/bstewart/files/lecture3_inference_slides.pdf</a></p>
+<h3 id="maximum-likelihoodgetting-to-the-logit-model">Maximum Likelihood/Getting to the Logit Model</h3>
+<p>Why use it? There is no analytical solution to solve for the
+coefficients in a logit model.</p>
+<h4 id="logarithm-review">Logarithm Review</h4>
+<ul>
+<li>log(A × B) = log(A) + log(B)</li>
+<li>log(A/B) = log(A) − log(B)</li>
+<li>log(Ab) = b × log(A)</li>
+<li>log(e) = ln(e) = 1</li>
+<li>log(1) = 0</li>
+</ul>
+<p>How do we get to that point?</p>
+<ol>
+<li>We can model $Y_i$ via a generalized linear model with a link
+function. (NOTE: THE LINK FUNCTION IS CRITICAL!) I.e.
+$$g(E[Y_i|X_i])=g(u_i)=X_i\beta = \beta_0 + \beta_1 X_{1i} &hellip; $$</li>
+</ol>
+<p>This means that the conditional mean is
+$$E[Y|X] = 1 \times p E[Y=1|X_i] +0 \times p E[Y=0|X_i]= 1 \times p E[Y=1|X_i] = p_i$$
+Remember, we&rsquo;re dealing with expectations, so we&rsquo;re dealing with a
+population.</p>
+<p>In order to estimate the probability from our sample, we want to find
+the link function for $p_i=\mu_i$</p>
+<p>To do this, we notice the following:</p>
+<p>Start with $L(\beta|Y=y,X=x) = \prod_{i=1}^n P(Y_i = y_i|X=x_i, \beta)$</p>
+<ol>
+<li>We&rsquo;re going to assume the $Y_i$ as a Bernoulli random variable</li>
+</ol>
+<p><a href="https://mathworld.wolfram.com/MaximumLikelihood.html">https://mathworld.wolfram.com/MaximumLikelihood.html</a>
+<a href="https://www.stat.cmu.edu/~cshalizi/uADA/12/lectures/ch12.pdf">https://www.stat.cmu.edu/~cshalizi/uADA/12/lectures/ch12.pdf</a></p>
+<h2 id="fisher-scoring---iteratively-solving-for-parameters">Fisher Scoring - Iteratively Solving for Parameters</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">getCoefficients</span> <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="n">design_matrix</span><span class="p">,</span> <span class="n">response_vector</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="m">.0001</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># =========================================================================</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># design_matrix      `X`     =&gt; n-by-(p+1)                                |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># response_vector    `y`     =&gt; n-by-1                                    |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># probability_vector `p`     =&gt; n-by-1                                    |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># weights_matrix     `W`     =&gt; n-by-n                                    |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># epsilon                    =&gt; threshold above which iteration continues |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># =========================================================================</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># n                          =&gt; # of observations                         |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># (p + 1)                    =&gt; # of parameterss, +1 for intercept term   |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># =========================================================================</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># U =&gt; First derivative of Log-Likelihood with respect to                 |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#      each beta_i, i.e. `Score Function`: X_transpose * (y - p)          |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#                                                                         |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># I =&gt; Second derivative of Log-Likelihood with respect to                |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#      each beta_i. The `Information Matrix`: (X_transpose * W * X)       |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#                                                                         |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># X^T*W*X results in a (p+1)-by-(p+1) matrix                              |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># X^T(y - p) results in a (p+1)-by-1 matrix                               |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># (X^T*W*X)^-1 * X^T(y - p) results in a (p+1)-by-1 matrix                |</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># ========================================================================|</span>
+</span></span><span class="line"><span class="cl">    <span class="n">X</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">design_matrix</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">response_vector</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># initialize logistic function used for Scoring calculations =&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># this is the probability at point v on the s-curve </span>
+</span></span><span class="line"><span class="cl">    <span class="n">pi_i</span> <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="kr">return</span><span class="p">(</span><span class="nf">exp</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="m">1</span> <span class="o">+</span> <span class="nf">exp</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># initialize beta_0, p_0, W_0, I_0 &amp; U_0 =&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">beta_0</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="nf">ncol</span><span class="p">(</span><span class="n">X</span><span class="p">)),</span> <span class="n">nrow</span><span class="o">=</span><span class="nf">ncol</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">byrow</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">dimnames</span><span class="o">=</span><span class="kc">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># initialize probability (at 1/2 - because all the x&#39;s are at zero and epx(0)/(1+exp(0))=0.5)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p_0</span>    <span class="o">&lt;-</span> <span class="nf">pi_i</span><span class="p">(</span><span class="n">X</span> <span class="o">%*%</span> <span class="n">beta_0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># here diag() turns a vector into a matrix where only the diagonals have a value</span>
+</span></span><span class="line"><span class="cl">    <span class="n">W_0</span>    <span class="o">&lt;-</span> <span class="nf">diag</span><span class="p">(</span><span class="nf">as.vector</span><span class="p">(</span><span class="n">p_0</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">p_0</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># information matrix used in fischer scoring</span>
+</span></span><span class="line"><span class="cl">    <span class="n">I_0</span>    <span class="o">&lt;-</span> <span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">W_0</span> <span class="o">%*%</span> <span class="n">X</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># U is the vector of first-order partial derivatives of the Log-Likelihood function</span>
+</span></span><span class="line"><span class="cl">    <span class="n">U_0</span>    <span class="o">&lt;-</span> <span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">%*%</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">p_0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># initialize variables for iteration =&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">beta_old</span>                   <span class="o">&lt;-</span> <span class="n">beta_0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">iter_I</span>                     <span class="o">&lt;-</span> <span class="n">I_0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">iter_U</span>                     <span class="o">&lt;-</span> <span class="n">U_0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">iter_p</span>                     <span class="o">&lt;-</span> <span class="n">p_0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">iter_W</span>                     <span class="o">&lt;-</span> <span class="n">W_0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fisher_scoring_iterations</span>  <span class="o">&lt;-</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># iterate until difference between abs(beta_new - beta_old) &lt; epsilon =&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">while</span><span class="p">(</span><span class="kc">TRUE</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># Fisher Scoring Update Step =&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fisher_scoring_iterations</span> <span class="o">&lt;-</span> <span class="n">fisher_scoring_iterations</span> <span class="o">+</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">        <span class="n">beta_new</span> <span class="o">&lt;-</span> <span class="n">beta_old</span> <span class="o">+</span> <span class="nf">solve</span><span class="p">(</span><span class="n">iter_I</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">iter_U</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kr">if</span> <span class="p">(</span><span class="nf">all</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">beta_new</span> <span class="o">-</span> <span class="n">beta_old</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">model_parameters</span>  <span class="o">&lt;-</span> <span class="n">beta_new</span>
+</span></span><span class="line"><span class="cl">            <span class="n">fitted_values</span>     <span class="o">&lt;-</span> <span class="nf">pi_i</span><span class="p">(</span><span class="n">X</span> <span class="o">%*%</span> <span class="n">model_parameters</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">covariance_matrix</span> <span class="o">&lt;-</span> <span class="nf">solve</span><span class="p">(</span><span class="n">iter_I</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="kr">break</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">iter_p</span>   <span class="o">&lt;-</span> <span class="nf">pi_i</span><span class="p">(</span><span class="n">X</span> <span class="o">%*%</span> <span class="n">beta_new</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">iter_W</span>   <span class="o">&lt;-</span> <span class="nf">diag</span><span class="p">(</span><span class="nf">as.vector</span><span class="p">(</span><span class="n">iter_p</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">iter_p</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">iter_I</span>   <span class="o">&lt;-</span> <span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">iter_W</span> <span class="o">%*%</span> <span class="n">X</span>
+</span></span><span class="line"><span class="cl">            <span class="n">iter_U</span>   <span class="o">&lt;-</span> <span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">%*%</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">iter_p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">beta_old</span> <span class="o">&lt;-</span> <span class="n">beta_new</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">summaryList</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#39;model_parameters&#39;</span><span class="o">=</span><span class="n">model_parameters</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#39;covariance_matrix&#39;</span><span class="o">=</span><span class="n">covariance_matrix</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#39;fitted_values&#39;</span><span class="o">=</span><span class="n">fitted_values</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#39;number_iterations&#39;</span><span class="o">=</span><span class="n">fisher_scoring_iterations</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">return</span><span class="p">(</span><span class="n">summaryList</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">getCoefficients</span><span class="p">(</span><span class="n">design_matrix</span> <span class="o">=</span> <span class="nf">cbind</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">mtcars[</span><span class="p">,</span><span class="nf">c</span><span class="p">(</span><span class="s">&#34;mpg&#34;</span><span class="p">,</span><span class="s">&#34;cyl&#34;</span><span class="p">)</span><span class="n">]</span><span class="p">),</span> <span class="n">response_vector</span> <span class="o">=</span>  <span class="n">mtcars[</span><span class="p">,</span><span class="nf">c</span><span class="p">(</span><span class="s">&#34;am&#34;</span><span class="p">)</span><span class="n">]</span><span class="p">,</span> <span class="n">epsilon</span> <span class="o">=</span> <span class="m">0.00001</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>$model_parameters
+          [,1]
+1   -8.7620273
+mpg  0.3650051
+cyl  0.1656727
+
+$covariance_matrix
+            1         mpg         cyl
+1   47.497321 -1.41755844 -3.13983099
+mpg -1.417558  0.04512941  0.08539374
+cyl -3.139831  0.08539374  0.23730853
+
+$fitted_values
+                          [,1]
+Mazda RX4           0.47430139
+Mazda RX4 Wag       0.47430139
+Datsun 710          0.55546547
+Hornet 4 Drive      0.51077756
+Hornet Sportabout   0.35181939
+Valiant             0.23841303
+Duster 360          0.09822771
+Merc 240D           0.69142437
+Merc 230            0.55546547
+Merc 280            0.31866923
+Merc 280C           0.21910300
+Merc 450SE          0.18991492
+Merc 450SL          0.24562965
+Merc 450SLC         0.13140770
+Cadillac Fleetwood  0.02556600
+Lincoln Continental 0.02556600
+Chrysler Imperial   0.11194046
+Fiat 128            0.97649663
+Honda Civic         0.95243013
+Toyota Corolla      0.98626984
+Toyota Corona       0.43739825
+Dodge Challenger    0.14441830
+AMC Javelin         0.13140770
+Camaro Z28          0.07030074
+Pontiac Firebird    0.39447289
+Fiat X1-9           0.86591368
+Porsche 914-2       0.80071911
+Lotus Europa        0.95243013
+Ford Pantera L      0.15848203
+Ferrari Dino        0.35953299
+Maserati Bora       0.12329722
+Volvo 142E          0.42843764
+
+$number_iterations
+[1] 6
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">glm</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="n">am</span> <span class="o">~</span> <span class="n">mpg</span> <span class="o">+</span> <span class="n">cyl</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="nf">binomial</span><span class="p">())</span>
+</span></span></code></pre></div><pre><code>Call:  glm(formula = am ~ mpg + cyl, family = binomial(), data = mtcars)
+
+Coefficients:
+(Intercept)          mpg          cyl  
+    -8.7620       0.3650       0.1657  
+
+Degrees of Freedom: 31 Total (i.e. Null);  29 Residual
+Null Deviance:      43.23 
+Residual Deviance: 29.56    AIC: 35.56
+</code></pre>
+<h1 id="model-diagnistics">Model Diagnistics</h1>
+<p>We have a model and now we need to evaluate it.</p>
+<p>See:</p>
+<h2 id="httpsbstewartscholarprincetonedusitesgfilestoruqf4016filesbstewartfileslecture4_glm_slidespdf">-
+<a href="https://bstewart.scholar.princeton.edu/sites/g/files/toruqf4016/files/bstewart/files/lecture4_glm_slides.pdf">https://bstewart.scholar.princeton.edu/sites/g/files/toruqf4016/files/bstewart/files/lecture4_glm_slides.pdf</a></h2>
+<p><a href="https://bookdown.org/ltupper/340f21_notes/deviance-and-residuals.html">https://bookdown.org/ltupper/340f21_notes/deviance-and-residuals.html</a></p>
+<p>Response residuals are handy if you want to explain a particular data
+point to someone who&rsquo;s not statistically trained, since they&rsquo;re on a
+more intuitive scale.</p>
+<p>Pearson residuals (and other standardized residuals) are helpful for
+trying to see if a point is really unusual, since they&rsquo;re scaled, like
+z-scores.</p>
+<p>Deviance residuals make a lot of sense if you want to be consistent
+about the math you&rsquo;re using &ndash; they are based on likelihood, and in
+GLMs, your model fitting is also based on maximum likelihood.</p>
+<p>The AIC is a measure of fit that penalizes for the number of parameters
+p AIC = −2lmod + 2p Smaller values indicate better fit and thus the AIC
+can be used to compare models (not necessarily nested).</p>
+<h1 id="logit-model-interpretation">Logit Model Interpretation</h1>
+<p>The coefficients cannot be interpreted like OLS coefficients. Because a
+one unit increase in an independent variable is a $\beta$ unit increase
+in the log odds, interpreting the coefficients as is isn&rsquo;t a useful
+exercise. In general we have three options:</p>
+<ol>
+<li>Interpret in percentage terms</li>
+<li>Simulate predicted probabilities</li>
+<li>Interpret in probability terms</li>
+</ol>
+<p>The first two options are the most useful. The easiest is the percentage
+interpretation.</p>
+<ol>
+<li>
+<p>Suppose we had a coefficient of 0.156. We&rsquo;d interpret that as
+$\exp(.1563404) = 1.1692241$ means that a one unit increase in x
+increased the odds of y by 17%.</p>
+</li>
+<li>
+<p>We can simulate predicted probabilities - essentially what we do is
+keep the other variables at their means and then simulate the
+probabilities when a continuous variable is at various values.
+Here&rsquo;s a toy example where we&rsquo;re predicting whether a car has a
+manual transmission as a function of mpg, quarter mile time, gears,
+and whether the engine is v shaped</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>  <span class="c1"># data wrangling and visualization</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">knitr</span><span class="p">)</span>      <span class="c1"># beautifying tables</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">car</span><span class="p">)</span>        <span class="c1"># for checking assumptions, e.g. vif etc.</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">broom</span><span class="p">)</span>      <span class="c1"># for tidy model output</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">questionr</span><span class="p">)</span>  <span class="c1"># for odds.ratios</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">sjPlot</span><span class="p">)</span>     <span class="c1"># for plotting results of log.regr.</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">sjmisc</span><span class="p">)</span>     <span class="c1"># for plotting results of log.regr. </span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">effects</span><span class="p">)</span>    <span class="c1"># for plotting results of log.regr. </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">model_output</span> <span class="o">&lt;-</span> <span class="nf">glm</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="n">am</span> <span class="o">~</span> <span class="n">mpg</span> <span class="o">+</span> <span class="n">vs</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mtcars</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="s">&#34;binomial&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">tibble</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="n">variables</span>  <span class="o">=</span> <span class="n">model_output</span> <span class="o">%&gt;%</span> <span class="nf">tidy</span><span class="p">()</span> <span class="o">%&gt;%</span> <span class="nf">select</span><span class="p">(</span><span class="n">term</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">pull</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">  <span class="n">log_OR</span>                 <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">model_output</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">  <span class="n">dplyr</span><span class="o">::</span><span class="nf">bind_cols</span><span class="p">(</span><span class="nf">confint</span><span class="p">(</span><span class="n">model_output</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">rename</span><span class="p">(</span><span class="n">lower_log_OR</span>    <span class="o">=</span> <span class="n">`2.5 %`</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="n">upper_log_OR</span>    <span class="o">=</span> <span class="n">`97.5 %`</span><span class="p">)</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">cbind</span><span class="p">(</span><span class="nf">odds.ratio</span><span class="p">(</span><span class="n">model_output</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">rename</span><span class="p">(</span><span class="n">lower_OR</span>        <span class="o">=</span> <span class="n">`2.5 %`</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="n">upper_OR</span>        <span class="o">=</span> <span class="n">`97.5 %`</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">mutate</span><span class="p">(</span><span class="n">percent_change</span>  <span class="o">=</span> <span class="nf">ifelse</span><span class="p">(</span><span class="n">OR</span> <span class="o">&lt;</span> <span class="m">1</span><span class="p">,</span> <span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">OR</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="m">-100</span><span class="p">,</span> <span class="p">(</span><span class="n">OR</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="m">100</span>  <span class="p">),</span>
+</span></span><span class="line"><span class="cl">         <span class="n">lower_percent_change</span> <span class="o">=</span> <span class="nf">ifelse</span><span class="p">(</span><span class="n">lower_OR</span> <span class="o">&lt;</span> <span class="m">1</span><span class="p">,</span> <span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">lower_OR</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="m">-100</span><span class="p">,</span> <span class="p">(</span><span class="n">lower_OR</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="m">100</span>  <span class="p">),</span>
+</span></span><span class="line"><span class="cl">         <span class="n">upper_percent_change</span> <span class="o">=</span> <span class="nf">ifelse</span><span class="p">(</span><span class="n">upper_OR</span> <span class="o">&lt;</span> <span class="m">1</span><span class="p">,</span> <span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">upper_OR</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="m">-100</span><span class="p">,</span> <span class="p">(</span><span class="n">upper_OR</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="m">100</span>  <span class="p">))</span> <span class="o">%&gt;%</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">mutate_if</span><span class="p">(</span><span class="n">is.numeric</span><span class="p">,</span> <span class="o">~</span><span class="nf">round</span><span class="p">(</span><span class="n">.,</span> <span class="m">3</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">select</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span> <span class="n">log_OR</span><span class="p">,</span> <span class="n">OR</span><span class="p">,</span> <span class="n">percent_change</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="nf">everything</span><span class="p">())</span> 
+</span></span></code></pre></div><pre><code>              variables log_OR    OR percent_change     p lower_log_OR
+(Intercept) (Intercept) -9.918 0.000   -2029731.464 0.005      -18.614
+mpg                 mpg  0.536 1.709         70.907 0.006        0.230
+vs                   vs -2.796 0.061      -1537.392 0.058       -6.189
+            upper_log_OR lower_OR upper_OR lower_percent_change
+(Intercept)       -4.472    0.000    0.011        -1.213715e+10
+mpg                1.023    1.258    2.782         2.581700e+01
+vs                -0.249    0.002    0.779        -4.864118e+04
+            upper_percent_change
+(Intercept)            -8649.642
+mpg                      178.168
+vs                       -28.290
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># show model output using a different package</span>
+</span></span><span class="line"><span class="cl"><span class="nf">tab_model</span><span class="p">(</span><span class="n">model_output</span><span class="p">,</span> <span class="n">show.ci</span> <span class="o">=</span> <span class="bp">F</span><span class="p">,</span> <span class="n">show.aic</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"> </td>
+<td style="text-align:center">am</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">Predictors</td>
+<td style="text-align:center">Odds Ratios</td>
+<td style="text-align:center">p</td>
+</tr>
+<tr>
+<td style="text-align:center">(Intercept)</td>
+<td style="text-align:center">0.00</td>
+<td style="text-align:center"><strong>0.005</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">mpg</td>
+<td style="text-align:center">1.71</td>
+<td style="text-align:center"><strong>0.006</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">vs</td>
+<td style="text-align:center">0.06</td>
+<td style="text-align:center">0.058</td>
+</tr>
+<tr>
+<td style="text-align:center">Observations</td>
+<td style="text-align:center">32</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">R<sup>2</sup> Tjur</td>
+<td style="text-align:center">0.475</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">AIC</td>
+<td style="text-align:center">30.944</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># We can predict probabilities and plot them</span>
+</span></span><span class="line"><span class="cl"><span class="nf">plot_model</span><span class="p">(</span><span class="n">model_output</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&#34;pred&#34;</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="s">&#34;mpg[all]&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><img src="figs/unnamed-chunk-5-1.png" style="width:100.0%" data-fig-align="center" data-fig-pos="htbp" />
+</li>
+<li>
+<p>You can also do predicted probabilities at a point. Mechanically,
+what we&rsquo;re doing is
+$$p = \frac{e^{X\beta}}{1+e^{X\beta}} = \frac{1}{1 + e^{-X\beta}}$$</p>
+<p>where $X\beta = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + &hellip;$</p>
+</li>
+</ol>
+<p>The problem with this approach is that probabilities are non-linear, so
+the predicted probability at a particular point may not be the best
+descriptor.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="m">1</span><span class="o">/</span><span class="p">(</span><span class="m">1</span><span class="o">+</span><span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="m">-9.9183</span> <span class="o">+</span> <span class="m">0.5359</span> <span class="o">*</span> <span class="m">25</span> <span class="o">+</span> <span class="m">-2.7957</span><span class="p">)))</span>
+</span></span></code></pre></div><pre><code>[1] 0.6645194
+</code></pre>
+<p>These probabilities are then the likelihoods of the observed
+predictor-values after their projection from the x-axis over the s-curve
+onto the y-axis</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">full_participation_2016_m</span> <span class="o">&lt;-</span> <span class="nf">glm</span><span class="p">(</span><span class="n">np_full_model_formula_2016_m</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="n">binomial</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">NP</span><span class="p">,</span> <span class="n">subset</span> <span class="o">=</span> <span class="n">Year.Quarter</span> <span class="o">==</span> <span class="m">2017.4</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">any_c</span> <span class="o">&lt;-</span> <span class="nf">glm</span><span class="p">(</span><span class="n">any_2012_c</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="n">binomial</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">NP</span><span class="p">,</span> <span class="n">subset</span> <span class="o">=</span> <span class="n">Year.Quarter</span> <span class="o">==</span> <span class="m">2012.4</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">any_m</span> <span class="o">&lt;-</span> <span class="nf">glm</span><span class="p">(</span><span class="n">any_2012_m</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="n">binomial</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">NP</span><span class="p">,</span> <span class="n">subset</span> <span class="o">=</span> <span class="n">Year.Quarter</span> <span class="o">==</span> <span class="m">2012.4</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">meetings_2012</span> <span class="o">&lt;-</span> <span class="nf">ggpredict</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">full_participation_2012_m</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="s">&#34;totrevenue2012[all]&#34;</span><span class="p">,</span> <span class="n">back.transform</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">meetings_2016</span> <span class="o">&lt;-</span> <span class="nf">ggpredict</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">full_participation_2016_m</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="s">&#34;totrevenue2012[all]&#34;</span><span class="p">,</span> <span class="n">back.transform</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">any_meetings</span> <span class="o">&lt;-</span> <span class="nf">ggpredict</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">any_m</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="s">&#34;totrevenue2012[all]&#34;</span><span class="p">,</span> <span class="n">back.transform</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># https://stackoverflow.com/questions/74634559/ggeffects-raw-data-loss</span>
+</span></span><span class="line"><span class="cl"><span class="n">p1_c</span> <span class="o">&lt;-</span> <span class="nf">ggpredict</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">full_participation_2012_c</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#34;totrevenue2012[all]&#34;</span><span class="p">,</span><span class="s">&#34;business_league_501c6&#34;</span><span class="p">),</span> <span class="n">back.transform</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">plot</span><span class="p">(</span><span class="n">show.y.title</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>  <span class="n">show.title</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">      <span class="nf">scale_x_continuous</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">trans</span> <span class="o">=</span> <span class="nf">log_trans</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">breaks</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1e8</span><span class="p">,</span> <span class="m">1e9</span><span class="p">,</span> <span class="m">1e10</span><span class="p">,</span> <span class="m">1e11</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">labels</span> <span class="o">=</span> <span class="n">scales</span><span class="o">::</span><span class="nf">label_dollar</span><span class="p">(</span><span class="n">scale_cut</span> <span class="o">=</span> <span class="nf">cut_short_scale</span><span class="p">()))</span> <span class="o">+</span>  
+</span></span><span class="line"><span class="cl">  <span class="nf">xlab</span><span class="p">(</span><span class="s">&#34;2012 Assets&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p1_m</span> <span class="o">&lt;-</span> <span class="nf">ggpredict</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">full_participation_2012_m</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#34;totrevenue2012[all]&#34;</span><span class="p">,</span><span class="s">&#34;business_league_501c6&#34;</span><span class="p">),</span> <span class="n">back.transform</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">plot</span><span class="p">(</span><span class="n">show.y.title</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>  <span class="n">show.title</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">      <span class="nf">scale_x_continuous</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">trans</span> <span class="o">=</span> <span class="nf">log_trans</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">breaks</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1e8</span><span class="p">,</span> <span class="m">1e9</span><span class="p">,</span> <span class="m">1e10</span><span class="p">,</span> <span class="m">1e11</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">labels</span> <span class="o">=</span> <span class="n">scales</span><span class="o">::</span><span class="nf">label_dollar</span><span class="p">(</span><span class="n">scale_cut</span> <span class="o">=</span> <span class="nf">cut_short_scale</span><span class="p">()))</span> <span class="o">+</span>  
+</span></span><span class="line"><span class="cl">  <span class="nf">xlab</span><span class="p">(</span><span class="s">&#34;2012 Assets&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p1_c</span> <span class="o">+</span> <span class="n">p1_m</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_line</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">meetings_2012</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">predicted</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">),</span> <span class="n">inherit.aes</span> <span class="o">=</span> <span class="bp">F</span><span class="p">,</span> <span class="n">linetype</span><span class="o">=</span><span class="s">&#34;dashed&#34;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#34;darkblue&#34;</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_ribbon</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">meetings_2012</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">ymin</span> <span class="o">=</span> <span class="n">conf.low</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">conf.high</span><span class="p">),</span> 
+</span></span><span class="line"><span class="cl">              <span class="n">alpha</span><span class="o">=</span><span class="m">0.1</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">              <span class="n">linetype</span><span class="o">=</span><span class="s">&#34;dashed&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="n">color</span><span class="o">=</span><span class="s">&#34;grey&#34;</span><span class="p">,</span> <span class="n">inherit.aes</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span> 
+</span></span></code></pre></div><h1 id="logit-in-machine-learning-ieclassification">Logit in Machine Learning i.e. Classification</h1>
+<h2 id="plotting-the-decision-boundary">Plotting the Decision Boundary</h2>
+<p>This is literally plotting the log odds line.</p>
+<p>See: -
+<a href="https://quantifyinghealth.com/plot-logistic-regression-decision-boundary-in-r/">https://quantifyinghealth.com/plot-logistic-regression-decision-boundary-in-r/</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">x1</span> <span class="o">=</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">x2</span> <span class="o">=</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># now draw 0/1&#39;s based on the data above </span>
+</span></span><span class="line"><span class="cl"><span class="n">xb</span> <span class="o">=</span> <span class="m">1</span> <span class="o">+</span> <span class="m">5</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">-</span> <span class="m">3</span> <span class="o">*</span> <span class="n">x2</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">&lt;-</span> <span class="m">1</span><span class="o">/</span><span class="p">(</span><span class="m">1</span><span class="o">+</span> <span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="n">xb</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">rbinom</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="m">100</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">prob</span> <span class="o">=</span> <span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#y = (x1 + x2 + rnorm(50)) &gt; 0</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">=</span> <span class="nf">glm</span><span class="p">(</span><span class="n">y</span> <span class="o">~</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="n">binomial</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># can do y either way</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># xb = 1 + 5 * x1 - 3 * x2</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># p &lt;- 1/(1+ exp(-xb))</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># y_alt = (  1 + 5 * x1 - 3 * x2 + rnorm(50)) &gt; 0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># model = glm(y_alt ~ x1 + x2, family = binomial)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Plot decision boundaries</span>
+</span></span><span class="line"><span class="cl"><span class="n">x1_ticks</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="nf">max</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="n">length.out</span><span class="o">=</span><span class="m">80</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">x2_ticks</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">x2</span><span class="p">),</span> <span class="nf">max</span><span class="p">(</span><span class="n">x2</span><span class="p">),</span> <span class="n">length.out</span><span class="o">=</span><span class="m">80</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">background_grid</span> <span class="o">=</span> <span class="nf">expand.grid</span><span class="p">(</span><span class="n">x1_ticks</span><span class="p">,</span> <span class="n">x2_ticks</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">names</span><span class="p">(</span><span class="n">background_grid</span><span class="p">)</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;x1&#39;</span><span class="p">,</span> <span class="s">&#39;x2&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">grid_predictions</span> <span class="o">=</span> <span class="nf">predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="n">newdata</span> <span class="o">=</span> <span class="n">background_grid</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="n">type</span> <span class="o">=</span> <span class="s">&#39;response&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">plot</span><span class="p">(</span><span class="n">background_grid</span><span class="p">,</span> <span class="n">pch</span> <span class="o">=</span> <span class="m">20</span><span class="p">,</span> <span class="n">cex</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">ifelse</span><span class="p">(</span><span class="n">grid_predictions</span> <span class="o">&gt;</span> <span class="m">0.5</span><span class="p">,</span> <span class="s">&#39;#E75A7C&#39;</span><span class="p">,</span> <span class="s">&#39;#5398BE&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nf">points</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">pch</span> <span class="o">=</span> <span class="m">19</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">ifelse</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="s">&#39;#E75A7C&#39;</span><span class="p">,</span> <span class="s">&#39;#5398BE&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">slope</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="n">[2]</span><span class="o">/</span><span class="p">(</span><span class="o">-</span><span class="nf">coef</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="n">[3]</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">intercept</span> <span class="o">=</span> <span class="nf">coef</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="n">[1]</span><span class="o">/</span><span class="p">(</span><span class="o">-</span><span class="nf">coef</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="n">[3]</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">clip</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span><span class="nf">max</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="nf">min</span><span class="p">(</span><span class="n">x2</span><span class="p">),</span> <span class="nf">max</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nf">abline</span><span class="p">(</span><span class="n">intercept</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">lwd</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">lty</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># boundary &lt;- function(model, data, class = NULL, predict_type = &#34;class&#34;, resolution = 100, showgrid = TRUE, ...) {</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   if(!is.null(class)) cl &lt;- data[,class] else cl &lt;- 1</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   data &lt;- data[,1:2]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   k &lt;- length(unique(cl))</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   plot(data, col = as.integer(cl)+1L, pch = as.integer(cl)+1L, ...)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   # make grid</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   r &lt;- sapply(data, range, na.rm = TRUE)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   xs &lt;- seq(r[1,1], r[2,1], length.out = resolution)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   ys &lt;- seq(r[1,2], r[2,2], length.out = resolution)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   g &lt;- cbind(rep(xs, each=resolution), rep(ys, time = resolution))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   colnames(g) &lt;- colnames(r)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   g &lt;- as.data.frame(g)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   ### guess how to get class labels from predict</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   ### (unfortunately not very consistent between models)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   p &lt;- predict(model, g, type = predict_type)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   if(is.list(p)) p &lt;- p$class</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   p &lt;- as.factor(p)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   if(showgrid) points(g, col = as.integer(p)+1L, pch = &#34;.&#34;)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   z &lt;- matrix(as.integer(p), nrow = resolution, byrow = TRUE)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   contour(xs, ys, z, add = TRUE, drawlabels = FALSE,</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#     lwd = 2, levels = (1:(k-1))+.5)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   invisible(z)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># }</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># class(model) &lt;- c(&#34;lr&#34;, class(model))</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># # specify the cutoff point for prediction</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># predict.lr &lt;- function(object, newdata, ...)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   predict.glm(object, newdata, type = &#34;response&#34;) &gt; .5</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># df1 &lt;- data.frame(cbind(y, x1, x2))</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># model = glm(y ~ x1, family = binomial)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># boundary(model = model, data = df1, class = &#34;y&#34;, main = &#34;Logistic Regression&#34;)</span>
+</span></span></code></pre></div><img src="figs/decision%20boundary-1.png" style="width:100.0%" data-fig-align="center" data-fig-pos="htbp" />
+<h3 id="heading"></h3>
+<h1 id="appendix">Appendix</h1>
+<h2 id="going-from-odds-to-probability">Going from odds to probability</h2>
+<p>Proof that odds / (1 + odds) = p</p>
+<p>$$\text{Odds} / (1 + \text{Odds} )  = \frac{p/(1-p)}{1+p/(1-p)} = \frac{p/(1-p)}{1/(1-p)}= \frac{p*(1-p)}{(1-p)*1}  = p$$</p>
+<p><a href="https://www.r-bloggers.com/2021/05/how-to-generate-correlated-data-in-r/">https://www.r-bloggers.com/2021/05/how-to-generate-correlated-data-in-r/</a></p>
+<h2 id="general-glm-properties">General GLM Properties</h2>
+<p>A GLM needs the following elements:</p>
+<ol>
+<li>
+<p>A linear predictor: $\eta = X \beta$ (So $\eta$ is n x 1). This is
+the systematic component from above.</p>
+</li>
+<li>
+<p>A link function, g, which describes how the mean of the process Y
+depends on the linear predictor:
+$$E[Y] = \mu = g^{-1}(\eta) = g^{-1}(X\beta)$$</p>
+</li>
+</ol>
+<p>The link function is the key to GLiMs: since the distribution of the
+response variable is non-normal, it&rsquo;s what lets us connect the
+structural component to the response&ndash;it &rsquo;links&rsquo; them (hence the name)
+<a href="https://stats.stackexchange.com/questions/20523/difference-between-logit-and-probit-models/30909#30909">https://stats.stackexchange.com/questions/20523/difference-between-logit-and-probit-models/30909#30909</a>.
+In other words, a link function that relates the linear predictor to a
+parameter of the distribution (systematic component).</p>
+<ol>
+<li>A variance function, V, and a dispersion parameter, $\phi$, which
+describes the variance of the process. This is the random component
+(stochastic component) from above.</li>
+</ol>
+<p>$$Var(Y) = \phi V(u) = \phi V(g^{-1}(X\beta))$$ To use a GLM, we need to
+satisfy the following assumptions:</p>
+<ol>
+<li>
+<p>The relationship between the dependent and independent variables may
+be non-linear</p>
+</li>
+<li>
+<p>The dependent variable can have a non-normal distribution</p>
+</li>
+<li>
+<p>In order to estimate the unknown parameters, the maximum likelihood
+estimation method need to be applied</p>
+</li>
+<li>
+<p>The errors are independent but can have a non-normal distribution</p>
+</li>
+</ol>
+<h2 id="glms-and-exponential-distributions">GLMs and Exponential Distributions</h2>
+<p>In a GLM, each $Y_i$ is assumed to be generated from a particular
+distribution in the exponential family, where the probability density
+function (pdf) is written as:</p>
+<p>$$f(y_i) = \text{exp}(\frac{y_i b\theta_i}{a_i(\phi)} + c_i(y_i,\phi)) $$
+where:</p>
+<ul>
+<li>$\theta_i$ is the location (i.e. mean) parameter;</li>
+<li>$\phi$ is the scale (standard deviation);</li>
+<li>$a_i(.)$, $b(.)$, and $c_i(.)$ are known functions</li>
+</ul>
+<p>If $Y_i$ has a distribution from the exponential family: -
+$E[Y_i] = \mu_i = b&rsquo;(\theta_i)$ -
+$Var[Y_i] = \sigma_i = b&rsquo;&rsquo;(\theta_i) a_i(\phi)$</p>
+<p>Suppose we have a normal distribution:
+$$\frac{1}{\sqrt{2\pi\sigma^2}}e^{\frac{-1}{2}\frac{(y_i-u_i)^2}{\sigma^2}}$$</p>
+<p>We can replace the $(y_i-u_i)^2$ with $y_i^2+u_i^2-2u_iy_i$</p>
+<p>So, now we have
+$$\frac{1}{\sqrt{2\pi\sigma^2}}e^{\frac{-1}{2}\frac{y_i^2+u_i^2-2u_iy_i}{\sigma^2}}$$</p>
+<p>To make this into the exponential form for GLM, rearrange the terms:</p>
+<p>$$\text{exp}(\frac{y_iu_i-\frac{1}{2}u_i^2}{\sigma^2}-\frac{y_i}{2 \sigma^2}-\frac{1}{2}\text{log}(2\pi\sigma^2)) $$</p>
+<p>Now we can bring this into GLM form using the following expressions:</p>
+<ul>
+<li>
+<p>$\theta_i$ is the location (i.e. mean) parameter - $\mu_i$</p>
+</li>
+<li>
+<p>$\phi$ is the scale (standard deviation) - $\sigma^2$</p>
+</li>
+<li>
+<p>$a_i(\phi) = \phi$</p>
+</li>
+<li>
+<p>$b(\theta) = \frac{1}{2}\theta^2$</p>
+</li>
+<li>
+<p>$c_i(y_i,\phi)= \frac{y_i}{2 \sigma^2}-\frac{1}{2}\text{log}(2\pi\sigma^2)$</p>
+</li>
+<li>
+<p>$E[Y_i] = \mu_i = b&rsquo;(\theta_i) = \theta_i = \mu$</p>
+</li>
+<li>
+<p>$Var[Y_i] = \sigma_i = b&rsquo;&rsquo;(\theta_i) a_i(\phi) = 1 \times \phi = \sigma^2$</p>
+</li>
+</ul>
+<p>Sources
+<a href="http://web.vu.lt/mif/a.buteikis/wp-content/uploads/PE_Book/5-1-GLM.html">http://web.vu.lt/mif/a.buteikis/wp-content/uploads/PE_Book/5-1-GLM.html</a>
+<a href="https://grodri.github.io/glms/notes/a2.pdf">https://grodri.github.io/glms/notes/a2.pdf</a>
+<a href="https://online.stat.psu.edu/stat504/lesson/beyond-logistic-regression-generalized-linear-models-glm">https://online.stat.psu.edu/stat504/lesson/beyond-logistic-regression-generalized-linear-models-glm</a></p>
+<h3 id="link-functions">Link Functions</h3>
+<p>The link function can be though of as a transformation of $E(Y)$ which
+links the actual values of Y to their estimated counterparts in an
+econometric model. In other words, tt relates the linear predictor to
+some parameter $\theta$ of the distribution for Y (usually the mean).</p>
+<p>Link functions - $g(⋅)$ - is a one-to-one continuous differentiable
+transformation of $\eta_i = g(\mu_i)$ then the function $g(\mu_i)$ is
+called a link function.</p>
+<p>GLMs assume that the transformed mean follows a linear model:
+$\eta_i = X_i\beta$</p>
+<p>Staying with Logistic Regression, suppose</p>
+<p>$Y_i ∼ \text{Binomial}(n_i, p_i)$ and we wish to model the proportions
+$Y_i/\eta_i$ . Then E(Yi/ni) = pi var(Yi/ni) = 1 ni pi(1 − pi) So our
+variance function is V (µi) = µi(1 − µi) Our link function must map from
+(0, 1) → (−∞, ∞). A common choice is g(µi) = logit(µi) = log  µi 1 − µi</p>
+<p>Sources -
+<a href="https://statmath.wu.ac.at/courses/heather_turner/glmCourse_001.pdf">https://statmath.wu.ac.at/courses/heather_turner/glmCourse_001.pdf</a></p>
+<p>Let g(·) be the link function and let E(Y ) = θ be the mean of
+distribution for Y .</p>
+<p>$$g(\theta) = X\beta$$ $$θ = g^{-1}(X\beta)$$</p>
+<p>Note that we usually use the inverse link function $g^{−1}(X\beta)$
+rather than the link function.</p>
+<p>Together with the linear predictor this forms the systematic component</p>
+<p><a href="https://bstewart.scholar.princeton.edu/sites/g/files/toruqf4016/files/bstewart/files/lecture4_glm_slides.pdf">https://bstewart.scholar.princeton.edu/sites/g/files/toruqf4016/files/bstewart/files/lecture4_glm_slides.pdf</a></p>
+</div>
+    <div class="post__footer">
+      
+
+      
+    </div>
+
+    
+  </div>
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        Steven Rashin
+        2024
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="../../js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></body>
+</html>
