@@ -6,7 +6,18 @@
     <description>Recent content on My blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 30 May 2024 09:30:44 -0500</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 Jun 2024 09:30:44 -0500</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SQL</title>
+      <link>http://localhost:1313/post/sql/</link>
+      <pubDate>Tue, 11 Jun 2024 09:30:44 -0500</pubDate>
+      
+      <guid>http://localhost:1313/post/sql/</guid>
+      
+        <description>We&amp;rsquo;ll continue with SQL. Since the latex of the previous posts displays inconsistently, I&amp;rsquo;ve made this post a github page itself.</description>
+      
+    </item>
+    
     <item>
       <title>Logistic Regression</title>
       <link>http://localhost:1313/post/logreg/</link>
